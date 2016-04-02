@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1FFD35E11CAC9CB90067C78E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFD35E01CAC9CB90067C78E /* AppDelegate.swift */; };
-		1FFD35E31CAC9CB90067C78E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFD35E21CAC9CB90067C78E /* ViewController.swift */; };
 		1FFD35E61CAC9CB90067C78E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FFD35E41CAC9CB90067C78E /* Main.storyboard */; };
 		1FFD35E91CAC9CB90067C78E /* BookSwap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1FFD35E71CAC9CB90067C78E /* BookSwap.xcdatamodeld */; };
 		1FFD35EB1CAC9CB90067C78E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FFD35EA1CAC9CB90067C78E /* Assets.xcassets */; };
@@ -16,12 +15,19 @@
 		1FFD35F81CAC9E190067C78E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FFD35F51CAC9E190067C78E /* FBSDKShareKit.framework */; };
 		1FFD35F91CAC9E190067C78E /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FFD35F61CAC9E190067C78E /* FBSDKLoginKit.framework */; };
 		1FFD35FA1CAC9E190067C78E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FFD35F71CAC9E190067C78E /* FBSDKCoreKit.framework */; };
+		5246AAA31CB062C3009A5623 /* BuyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246AAA21CB062C3009A5623 /* BuyCollectionViewController.swift */; };
+		5246AAA51CB06308009A5623 /* SellTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246AAA41CB06308009A5623 /* SellTableViewController.swift */; };
+		5246AAA71CB06329009A5623 /* SellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246AAA61CB06329009A5623 /* SellTableViewCell.swift */; };
+		5246AAA91CB0633A009A5623 /* BuyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246AAA81CB0633A009A5623 /* BuyCollectionViewCell.swift */; };
+		5246AAAD1CB06447009A5623 /* BuyDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246AAAC1CB06447009A5623 /* BuyDetailedViewController.swift */; };
+		5246AAAF1CB06461009A5623 /* SellInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246AAAE1CB06461009A5623 /* SellInfoViewController.swift */; };
+		5246AAB11CB06477009A5623 /* SellSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246AAB01CB06477009A5623 /* SellSignInViewController.swift */; };
+		5246AAB31CB065EC009A5623 /* Textbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246AAB21CB065EC009A5623 /* Textbook.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1FFD35DD1CAC9CB90067C78E /* BookSwap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookSwap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FFD35E01CAC9CB90067C78E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1FFD35E21CAC9CB90067C78E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1FFD35E51CAC9CB90067C78E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1FFD35E81CAC9CB90067C78E /* BookSwap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BookSwap.xcdatamodel; sourceTree = "<group>"; };
 		1FFD35EA1CAC9CB90067C78E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -30,6 +36,14 @@
 		1FFD35F51CAC9E190067C78E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		1FFD35F61CAC9E190067C78E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		1FFD35F71CAC9E190067C78E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		5246AAA21CB062C3009A5623 /* BuyCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuyCollectionViewController.swift; sourceTree = "<group>"; };
+		5246AAA41CB06308009A5623 /* SellTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellTableViewController.swift; sourceTree = "<group>"; };
+		5246AAA61CB06329009A5623 /* SellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellTableViewCell.swift; sourceTree = "<group>"; };
+		5246AAA81CB0633A009A5623 /* BuyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuyCollectionViewCell.swift; sourceTree = "<group>"; };
+		5246AAAC1CB06447009A5623 /* BuyDetailedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuyDetailedViewController.swift; sourceTree = "<group>"; };
+		5246AAAE1CB06461009A5623 /* SellInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellInfoViewController.swift; sourceTree = "<group>"; };
+		5246AAB01CB06477009A5623 /* SellSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellSignInViewController.swift; sourceTree = "<group>"; };
+		5246AAB21CB065EC009A5623 /* Textbook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Textbook.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,15 +82,38 @@
 		1FFD35DF1CAC9CB90067C78E /* BookSwap */ = {
 			isa = PBXGroup;
 			children = (
+				5246AAAA1CB0634F009A5623 /* Buy */,
+				5246AAAB1CB0637A009A5623 /* Sell */,
 				1FFD35E01CAC9CB90067C78E /* AppDelegate.swift */,
-				1FFD35E21CAC9CB90067C78E /* ViewController.swift */,
 				1FFD35E41CAC9CB90067C78E /* Main.storyboard */,
 				1FFD35EA1CAC9CB90067C78E /* Assets.xcassets */,
 				1FFD35EC1CAC9CB90067C78E /* LaunchScreen.storyboard */,
 				1FFD35EF1CAC9CB90067C78E /* Info.plist */,
 				1FFD35E71CAC9CB90067C78E /* BookSwap.xcdatamodeld */,
+				5246AAB21CB065EC009A5623 /* Textbook.swift */,
 			);
 			path = BookSwap;
+			sourceTree = "<group>";
+		};
+		5246AAAA1CB0634F009A5623 /* Buy */ = {
+			isa = PBXGroup;
+			children = (
+				5246AAA21CB062C3009A5623 /* BuyCollectionViewController.swift */,
+				5246AAA81CB0633A009A5623 /* BuyCollectionViewCell.swift */,
+				5246AAAC1CB06447009A5623 /* BuyDetailedViewController.swift */,
+			);
+			name = Buy;
+			sourceTree = "<group>";
+		};
+		5246AAAB1CB0637A009A5623 /* Sell */ = {
+			isa = PBXGroup;
+			children = (
+				5246AAA41CB06308009A5623 /* SellTableViewController.swift */,
+				5246AAA61CB06329009A5623 /* SellTableViewCell.swift */,
+				5246AAAE1CB06461009A5623 /* SellInfoViewController.swift */,
+				5246AAB01CB06477009A5623 /* SellSignInViewController.swift */,
+			);
+			name = Sell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,8 +188,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FFD35E91CAC9CB90067C78E /* BookSwap.xcdatamodeld in Sources */,
-				1FFD35E31CAC9CB90067C78E /* ViewController.swift in Sources */,
+				5246AAAD1CB06447009A5623 /* BuyDetailedViewController.swift in Sources */,
+				5246AAAF1CB06461009A5623 /* SellInfoViewController.swift in Sources */,
+				5246AAA91CB0633A009A5623 /* BuyCollectionViewCell.swift in Sources */,
+				5246AAA31CB062C3009A5623 /* BuyCollectionViewController.swift in Sources */,
+				5246AAB11CB06477009A5623 /* SellSignInViewController.swift in Sources */,
+				5246AAA71CB06329009A5623 /* SellTableViewCell.swift in Sources */,
+				5246AAB31CB065EC009A5623 /* Textbook.swift in Sources */,
 				1FFD35E11CAC9CB90067C78E /* AppDelegate.swift in Sources */,
+				5246AAA51CB06308009A5623 /* SellTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +354,7 @@
 				1FFD35F41CAC9CB90067C78E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
