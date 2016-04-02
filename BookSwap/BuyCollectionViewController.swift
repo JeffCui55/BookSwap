@@ -11,6 +11,7 @@ import UIKit
 private let reuseIdentifier = "Cell"
 
 class BuyCollectionViewController: UICollectionViewController {
+    
     var textbookList:[Textbook]!
     
     override func viewDidLoad() {
@@ -21,10 +22,33 @@ class BuyCollectionViewController: UICollectionViewController {
 
         // Register cell classes
         self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        
+        //in print(NSString(data: data!, encoding: NSUTF8StringEncoding))
         let url = NSURL(string: "http://ec2-52-91-193-208.compute-1.amazonaws.com/textbooks/")
+        
+        
         let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {
-            (data, response, error) in print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            (data, response, error) -> Void in
+            if let jsonData = data {
+                
+                if let jsonString = NSString(data: jsonData, encoding: NSUTF8StringEncoding) {
+                    
+                    var json: [String]!
+                    do {
+                        json = try NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions()) as? [String]
+                        print(json)
+                    } catch {
+                        print(error)
+                    }
+                    //print(jsonString)
+                }
+            }
+            else if let requestError = error {
+                print ("Error fetching data: \(requestError)")
+            }
+            else {
+                print ("Unexpected error.")
+            }
+            
         }
         task.resume()
         
