@@ -9,5 +9,8 @@
 import UIKit
 
 class BuyCollectionViewCell: UICollectionViewCell {
+    @IBOutlet var itemImage:UIImageView!
+    @IBOutlet var itemTitle:UILabel!
+    @IBOutlet var itemPrice:UILabel!
     
 }

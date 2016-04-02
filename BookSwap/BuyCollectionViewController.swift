@@ -11,7 +11,8 @@ import UIKit
 private let reuseIdentifier = "Cell"
 
 class BuyCollectionViewController: UICollectionViewController {
-
+    var textbookList:[Textbook]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,7 +21,13 @@ class BuyCollectionViewController: UICollectionViewController {
 
         // Register cell classes
         self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
+        
+        let url = NSURL(string: "http://ec2-52-91-193-208.compute-1.amazonaws.com/textbooks/")
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {
+            (data, response, error) in print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+        }
+        task.resume()
+        
         // Do any additional setup after loading the view.
     }
 
@@ -43,7 +50,7 @@ class BuyCollectionViewController: UICollectionViewController {
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
 
