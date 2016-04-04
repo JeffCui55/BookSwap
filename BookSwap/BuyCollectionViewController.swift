@@ -30,17 +30,21 @@ class BuyCollectionViewController: UICollectionViewController {
             (data, response, error) -> Void in
             if let jsonData = data {
                 
-                if let jsonString = NSString(data: jsonData, encoding: NSUTF8StringEncoding) {
-                    
-                    var json: [String]!
+//                if let jsonString = NSString(data: jsonData, encoding: NSUTF8StringEncoding) {
+//                    print(jsonString)
+                //NEED A CHECK TO MAKE SURE IT's JSON parse-able
                     do {
-                        json = try NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions()) as? [String]
-                        print(json)
+                        let json = try NSJSONSerialization.JSONObjectWithData(jsonData, options:NSJSONReadingOptions())
+                        print(json[0])
+                        print(json[1])
+                        print(json[2])
+                        let jsonMirror = Mirror(reflecting: json)
+                        print(jsonMirror.subjectType)
                     } catch {
                         print(error)
                     }
                     //print(jsonString)
-                }
+//                }
             }
             else if let requestError = error {
                 print ("Error fetching data: \(requestError)")

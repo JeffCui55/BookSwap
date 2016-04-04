@@ -8,6 +8,11 @@
 
 import UIKit
 import CoreData
+import FBSDKLoginKit
+import FBSDKShareKit
+import FBSDKCoreKit
+
+// FB app id 119344698463801
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
