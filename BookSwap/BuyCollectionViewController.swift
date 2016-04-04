@@ -12,7 +12,7 @@ private let reuseIdentifier = "Cell"
 
 class BuyCollectionViewController: UICollectionViewController {
     
-    var textbookList:[Textbook]!
+    var textbookList:[Textbook]? = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +35,53 @@ class BuyCollectionViewController: UICollectionViewController {
                 //NEED A CHECK TO MAKE SURE IT's JSON parse-able
                     do {
                         let json = try NSJSONSerialization.JSONObjectWithData(jsonData, options:NSJSONReadingOptions())
+                        let jsonL = json.count as Int
+                        for i in 0..<jsonL {
+                            let tempBook = json[i]
+                            let newBook = Textbook()
+                            newBook.condition = tempBook["Condition"] as! String
+                            
+                            let dateFormatter = NSDateFormatter()
+                            dateFormatter.dateFormat = "MM/dd/YY"
+                            newBook.date = dateFormatter.dateFromString(tempBook["DatePosted"] as! String)
+                            
+                            newBook.itemDescription = tempBook["Description"] as! String
+                            newBook.edition = tempBook["Edition"] as! String
+                            newBook.vendorEmail = tempBook["Email"] as! String
+                            // Will need to do GPS X and Y coordinates
+                            newBook.GPS = tempBook["GPS"] as! NSDecimalNumber
+                            newBook.index = tempBook["ID"] as! Int
+                            newBook.ISBN = tempBook["ISBN"] as! String
+                            //newBook.imageSource = tempBook["Image"] as? String
+                            newBook.imageSource = "No Image Selected"
+                            newBook.vendorPhone = tempBook["Phone"] as! String
+                            newBook.subject = tempBook["Subject"] as! String
+                            newBook.title = tempBook["Title"] as! String
+                            newBook.vendorType = tempBook["TypeOfPerson"] as! String
+                            newBook.price = Double(tempBook["price"] as! NSNumber)
+                            
+                            print(newBook.condition, newBook.date, newBook.itemDescription, newBook.edition)
+                            print(newBook.vendorEmail, newBook.GPS, newBook.index, newBook.ISBN)
+                            print(newBook.imageSource, newBook.vendorPhone, newBook.subject, newBook.title, newBook.vendorType, newBook.price)
+                            print("\n")
+                            
+                            self.textbookList?.append(newBook)
+                            
+                        }
+//                        var index:Int!
+//                        var ISBN:String!
+//                        var title:String!
+//                        var edition:String!
+//                        var date:NSDate!
+//                        var condition:String!
+//                        var price:Double!
+//                        var GPS:NSDecimalNumber! //fix this in database to get X and Y coords
+//                        var imageSource:String? //we'll allow null until we can fix it
+//                        var subject:String!
+//                        var itemDescription:String!
+//                        var vendorPhone:String!
+//                        var vendorEmail:String!
+//                        var vendorType:String!
                         let book1 = json[0];
                         if let condition = book1["Condition"] as? String{
                             print(condition)
