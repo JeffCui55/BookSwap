@@ -35,11 +35,14 @@ class BuyCollectionViewController: UICollectionViewController {
                 //NEED A CHECK TO MAKE SURE IT's JSON parse-able
                     do {
                         let json = try NSJSONSerialization.JSONObjectWithData(jsonData, options:NSJSONReadingOptions())
-                        print(json[0])
-                        print(json[1])
-                        print(json[2])
-                        let jsonMirror = Mirror(reflecting: json)
-                        print(jsonMirror.subjectType)
+                        let book1 = json[0];
+                        if let condition = book1["Condition"] as? String{
+                            print(condition)
+                        }
+                        
+//                        print(json[2])
+//                        let jsonMirror = Mirror(reflecting: json)
+//                        print(jsonMirror.subjectType)
                     } catch {
                         print(error)
                     }
