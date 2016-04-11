@@ -164,16 +164,18 @@ class BuyCollectionViewController: UICollectionViewController {
                     newBook.edition = tempBook["Edition"] as! String
                     newBook.vendorEmail = tempBook["Email"] as! String
                     // Will need to do GPS X and Y coordinates
-                    newBook.GPS = tempBook["GPS"] as! NSDecimalNumber
+                    newBook.GPSX = Double(tempBook["GPSX"] as! NSNumber)
+                    newBook.GPSY = Double(tempBook["GPSY"] as! NSNumber)
                     newBook.index = tempBook["ID"] as! Int
                     newBook.ISBN = tempBook["ISBN"] as! String
-                    //newBook.imageSource = tempBook["Image"] as? String
-                    newBook.imageSource = "No Image Selected"
+                    newBook.imageSource = tempBook["Image"] as? String
+                    //newBook.imageSource = "No Image Selected"
                     newBook.vendorPhone = tempBook["Phone"] as! String
                     newBook.subject = tempBook["Subject"] as! String
                     newBook.title = tempBook["Title"] as! String
                     newBook.vendorType = tempBook["TypeOfPerson"] as! String
                     newBook.price = Double(tempBook["price"] as! NSNumber)
+                    newBook.sellStatus = Int(tempBook["Status"] as! NSNumber)
                     list?.append(newBook)
                     print(list?.count)
                 }
