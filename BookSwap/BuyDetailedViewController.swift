@@ -10,10 +10,22 @@ import UIKit
 
 class BuyDetailedViewController: UIViewController {
 
+    @IBOutlet weak var titleText: UILabel!
+    var titleName = String()
+    @IBOutlet weak var ISBNText: UILabel!
+    var ISBNName = String()
+    @IBOutlet weak var ContactText: UILabel!
+    var ContactName = String()
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        titleText.text = titleName
+        ISBNText.text = ISBNName
+        ContactText.text = ContactName
     }
 
     override func didReceiveMemoryWarning() {

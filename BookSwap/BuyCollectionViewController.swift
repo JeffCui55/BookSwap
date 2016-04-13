@@ -12,7 +12,7 @@ private let reuseIdentifier = "Cell"
 
 class BuyCollectionViewController: UICollectionViewController {
     
-    var textbookList:[Textbook]? = []
+    var textbookList:[Textbook]! = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -344,6 +344,23 @@ class BuyCollectionViewController: UICollectionViewController {
         return cell
     }
 
+    let buyDetailedViewIdentifier = "ShowBuyDetailViewSegue"
+    
+    // MARK: - Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        var point : CGPoint = sender.convertPoint(CGPointZero, toView:collectionView)
+        if segue.identifier == buyDetailedViewIdentifier {
+            if let destination = segue.destinationViewController as? BuyDetailedViewController {
+                //if let indexPath = collectionView!.indexPathForCell(sender as! BuyCollectionViewCell) {
+                if let indexPath = collectionView!.indexPathForItemAtPoint(point){
+                    print(indexPath.row)
+                    destination.titleName = String(textbookList![indexPath.row].title)
+                    destination.ISBNName = String(textbookList![indexPath.row].ISBN)
+                    destination.ContactName = String(textbookList![indexPath.row].vendorEmail)
+                }
+            }
+        }
+    }
     // MARK: UICollectionViewDelegate
 
     /*
