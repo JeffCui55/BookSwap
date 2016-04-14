@@ -152,7 +152,7 @@ class BuyCollectionViewController: UICollectionViewController {
                 //                    as? NSDictionary else { throw JSONError.ConversionFailed }
                 let jsonL = json.count as Int
                 for i in 0..<jsonL {
-                    let tempBook = json[i]
+                    let tempBook = (json as! NSArray)[i]
                     let newBook = Textbook()
                     newBook.condition = tempBook["Condition"] as! String
                     
@@ -354,6 +354,8 @@ class BuyCollectionViewController: UICollectionViewController {
                 //if let indexPath = collectionView!.indexPathForCell(sender as! BuyCollectionViewCell) {
                 if let indexPath = collectionView!.indexPathForItemAtPoint(point){
                     print(indexPath.row)
+                    
+                    // Create more variables in detailed view and update them here for proper display
                     destination.titleName = String(textbookList![indexPath.row].title)
                     destination.ISBNName = String(textbookList![indexPath.row].ISBN)
                     destination.ContactName = String(textbookList![indexPath.row].vendorEmail)
