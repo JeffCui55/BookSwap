@@ -10,12 +10,69 @@ import UIKit
 
 class SellSignInViewController: UIViewController {
 
+    @IBOutlet weak var ContactName: UITextField!
+    @IBOutlet weak var ContactEmail: UITextField!
+    @IBOutlet weak var ContactPhone: UITextField!
+    
+    @IBOutlet weak var SellSignInScrollView: UIScrollView!
+    
+    let prefs = NSUserDefaults.standardUserDefaults()
+    
+    @IBAction func SubmitContactInfo(sender: AnyObject) {
+        if(ContactName.text != "" && (ContactEmail.text != "" || ContactPhone.text != "")){
+            let encodeName = ContactName.text!
+            let encodeEmail = ContactEmail.text!
+            let encodePhone = ContactPhone.text!
+            
+            prefs.setObject(encodeName, forKey: "BookSwapContactName")
+            prefs.setObject(encodeEmail, forKey: "BookSwapContactEmail")
+            prefs.setObject(encodePhone, forKey: "BookSwapContactPhone")
+            prefs.synchronize()
+            
+            navigationController?.popViewControllerAnimated(true)
+            
+        }
+        else{
+            let alert = UIAlertController(title: "Incomplete",
+                                          message: "Please provide your name and a way to contact you!", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SellSignInViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
+        if((prefs.objectForKey("BookSwapContactName")) == nil || (prefs.objectForKey("BookSwapContactEmail")) == nil
+            || (prefs.objectForKey("BookSwapContactPhone")) == nil ){
+            let encodeName = ContactName.text!
+            let encodeEmail = ContactEmail.text!
+            let encodePhone = ContactPhone.text!
+            prefs.setObject(encodeName, forKey: "BookSwapContactName")
+            prefs.setObject(encodeEmail, forKey: "BookSwapContactEmail")
+            prefs.setObject(encodePhone, forKey: "BookSwapContactPhone")
+            prefs.synchronize()
+        }
+        else{
+            let decodeName = prefs.objectForKey("BookSwapContactName") as! String
+            let decodeEmail = prefs.objectForKey("BookSwapContactEmail") as! String
+            let decodePhone = prefs.objectForKey("BookSwapContactPhone") as! String
+            self.ContactName.text = decodeName
+            self.ContactEmail.text = decodeEmail
+            self.ContactPhone.text = decodePhone
+
+        }
     }
 
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

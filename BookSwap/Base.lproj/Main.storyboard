@@ -102,10 +102,10 @@
                                 <rect key="frame" x="16" y="7" width="85" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Contact Info"/>
+                                <connections>
+                                    <segue destination="TeQ-be-tMS" kind="show" id="ADZ-4n-Q5j"/>
+                                </connections>
                             </button>
-                            <connections>
-                                <segue destination="TeQ-be-tMS" kind="show" id="J27-xo-vCf"/>
-                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="Jpg-rU-d0G">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="cLg-Hj-Ois">
@@ -321,10 +321,10 @@
             </objects>
             <point key="canvasLocation" x="-2062" y="268"/>
         </scene>
-        <!--Sell Info View Controller-->
+        <!--Sell Sign In View Controller-->
         <scene sceneID="Mlu-GR-w1a">
             <objects>
-                <viewController id="TeQ-be-tMS" customClass="SellInfoViewController" customModule="BookSwap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="TeQ-be-tMS" customClass="SellSignInViewController" customModule="BookSwap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="m0n-Hb-BdN"/>
                         <viewControllerLayoutGuide type="bottom" id="BYJ-9t-KSl"/>
@@ -365,7 +365,7 @@
                                             <color key="titleColor" red="0.0070289468070000001" green="0.4459832051" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="SubmitButton:" destination="TeQ-be-tMS" eventType="touchUpInside" id="dO1-Em-p39"/>
+                                            <action selector="SubmitContactInfo:" destination="TeQ-be-tMS" eventType="touchUpInside" id="88x-s7-a1s"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uKr-Ws-xbN">
@@ -422,8 +422,10 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outlet property="ReminderUIDescription" destination="unh-ah-Sp6" id="OPw-UL-g1v"/>
-                        <outlet property="ReminderUITitle" destination="jNy-vz-5hr" id="F8m-8U-zd6"/>
+                        <outlet property="ContactEmail" destination="unh-ah-Sp6" id="In7-Vv-Pcy"/>
+                        <outlet property="ContactName" destination="jNy-vz-5hr" id="Ucn-dl-8sk"/>
+                        <outlet property="ContactPhone" destination="i8G-cs-N1a" id="7O1-Jg-BgP"/>
+                        <outlet property="SellSignInScrollView" destination="NXv-7p-axx" id="6ty-aE-241"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kCs-VJ-wac" userLabel="First Responder" sceneMemberID="firstResponder"/>

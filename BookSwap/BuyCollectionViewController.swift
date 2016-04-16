@@ -348,7 +348,7 @@ class BuyCollectionViewController: UICollectionViewController {
     
     // MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        var point : CGPoint = sender.convertPoint(CGPointZero, toView:collectionView)
+        let point : CGPoint = sender.convertPoint(CGPointZero, toView:collectionView)
         if segue.identifier == buyDetailedViewIdentifier {
             if let destination = segue.destinationViewController as? BuyDetailedViewController {
                 //if let indexPath = collectionView!.indexPathForCell(sender as! BuyCollectionViewCell) {
