@@ -32,8 +32,9 @@ class BuyCollectionViewController: UICollectionViewController {
                 self.collectionView?.reloadData()
             }
         }
-        
+        self.collectionView?.backgroundColor = UIColor.init(colorLiteralRed: (242/255), green: (242/255), blue: (242/255), alpha: 1)
     }
+    
     
     func getBooks(url:NSURL, completion:(success:[Textbook]) -> Void) {
         var list:[Textbook]? = []
