@@ -230,10 +230,10 @@
             </objects>
             <point key="canvasLocation" x="-2285" y="557"/>
         </scene>
-        <!--View Controller-->
+        <!--Sell Info View Controller-->
         <scene sceneID="RSd-kr-3xY">
             <objects>
-                <viewController id="TEL-N2-RII" sceneMemberID="viewController">
+                <viewController id="TEL-N2-RII" customClass="SellInfoViewController" customModule="BookSwap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fIa-Yk-2HO"/>
                         <viewControllerLayoutGuide type="bottom" id="20i-dj-fb8"/>
@@ -241,9 +241,24 @@
                     <view key="view" contentMode="scaleToFill" id="mgl-Ft-l6c">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L5T-zO-xk3">
+                                <rect key="frame" x="50" y="76" width="220" height="220"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfT-i5-1M1">
+                                <rect key="frame" x="134" y="314" width="52" height="30"/>
+                                <state key="normal" title="Add pic"/>
+                                <connections>
+                                    <action selector="selectAction:" destination="TEL-N2-RII" eventType="touchUpInside" id="foS-xQ-xQu"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="currentImage" destination="L5T-zO-xk3" id="Qbk-9k-dh4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Huh-ai-0jL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
