@@ -10,7 +10,7 @@
         <scene sceneID="ul3-SQ-mk8">
             <objects>
                 <navigationController id="XjG-6U-dbl" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Buy" id="JZA-M9-fKC"/>
+                    <tabBarItem key="tabBarItem" title="Buy" image="Shelf" selectedImage="Shelf" id="JZA-M9-fKC"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Q3Q-jM-yn5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -28,7 +28,7 @@
         <scene sceneID="7bS-gy-Haz">
             <objects>
                 <navigationController id="3ok-qk-VHD" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Sell" id="Ypo-LI-ed0"/>
+                    <tabBarItem key="tabBarItem" title="Sell" image="Average$Filled" selectedImage="Average$Filled" id="Ypo-LI-ed0"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="D1g-8r-KmP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -503,4 +503,8 @@
             <point key="canvasLocation" x="-2285" y="-556"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Average$Filled" width="25" height="25"/>
+        <image name="Shelf" width="25" height="25"/>
+    </resources>
 </document>

@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Book Shelf Filled-50.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Book Shelf Filled-100.png",
+      "filename" : "Book Shelf Filled-50.png",
       "scale" : "2x"
     },
     {

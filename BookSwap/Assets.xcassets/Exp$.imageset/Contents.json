@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Expensive 2-50.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Expensive 2-100.png",
+      "filename" : "Expensive@2x.png",
       "scale" : "2x"
     },
     {
