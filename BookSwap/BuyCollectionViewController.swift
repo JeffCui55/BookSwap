@@ -13,6 +13,9 @@ private let reuseIdentifier = "Cell"
 class BuyCollectionViewController: UICollectionViewController {
     
     var textbookList:[Textbook]! = []
+    var refreshControl: UIRefreshControl!
+    let url = NSURL(string: "http://ec2-52-91-193-208.compute-1.amazonaws.com/textbooks/")
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +25,9 @@ class BuyCollectionViewController: UICollectionViewController {
 
         // Register cell classes
         self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.alwaysBounceVertical = true
 
         // Do any additional setup after loading the view.
-        let url = NSURL(string: "http://ec2-52-91-193-208.compute-1.amazonaws.com/textbooks/")
 
         getBooks(url!){success in
             dispatch_sync(dispatch_get_main_queue()) {
@@ -35,6 +38,24 @@ class BuyCollectionViewController: UICollectionViewController {
         self.collectionView?.backgroundColor = UIColor.init(colorLiteralRed: (242/255), green: (242/255), blue: (242/255), alpha: 1)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Refresh Books!")
+        self.refreshControl.addTarget(self, action: #selector(BuyCollectionViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        self.collectionView!.addSubview(self.refreshControl) // not required when using UITableViewController
+    }
+    
+    func refresh(sender:AnyObject)
+    {
+        getBooks(url!){success in
+            dispatch_sync(dispatch_get_main_queue()) {
+                self.textbookList = success;
+                self.collectionView?.reloadData()
+            }
+        }
+        self.refreshControl.endRefreshing()
+
+    }
     
     func getBooks(url:NSURL, completion:(success:[Textbook]) -> Void) {
         var list:[Textbook]? = []

@@ -10,8 +10,9 @@ import UIKit
 
 class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var currentImage: UIImageView!
-    
+    weak var finalImage:UIImage?
     let imagePicker = UIImagePickerController()
+    let rdsEndPoint = "http://ec2-52-91-193-208.compute-1.amazonaws.com/textbooks"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,10 +56,18 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.currentImage.image = pickedImage
+            self.finalImage = pickedImage
             if(imagePicker.sourceType == .Camera){
                 let selectorToCall = #selector(SellInfoViewController.imageWasSavedSuccessfully(_:didFinishSavingWithError:context:))
                 UIImageWriteToSavedPhotosAlbum(pickedImage, self, selectorToCall, nil)
             }
+            
+            //setting up image encoding
+//            if let imageData = UIImageJPEGRepresentation(finalImage!, 0.5)
+//            {
+//                let base64String = imageData.base64EncodedStringWithOptions([])
+//                print(base64String)
+//            }
         }
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -98,6 +107,49 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
                     print("Displaying")
                 }
             }
+    
+    @IBAction func submit(){
+        postData(finalImage!) { (error) -> Void in
+            print(error)
+        }
+    }
+    
+    func postData(image: UIImage, completion: (error: NSError?) -> Void){
+        let session = NSURLSession.sharedSession()
+        if let imageData = UIImageJPEGRepresentation(image, 0.5)
+        {
+            //let requestString:String = "?isbn=1234567891123&title=OnlyInAmerica&edition=2&dateposted=4/21/16&condition=goodish&price=19.99&gpsx=-157.824&gpsy=21.28&image=\(imageData.base64EncodedStringWithOptions([]))&subject=maths&description=pretty_good_but_ive_read_better&phone=4349119111&email=guy@guy.com&top=vendor&status=0";
+            
+            let requestString:String = "?isbn=1234567891123&title=OnlyInAmerica&edition=2&dateposted=4/21/16&condition=goodish&price=19.99&gpsx=-157.824&gpsy=21.28&image=thing.png&subject=maths&description=pretty_good_but_ive_read_better&phone=4349119111&email=guy@guy.com&top=vendor&status=0";
+            var urlString:String = self.rdsEndPoint + requestString;
+            let request = NSMutableURLRequest(URL: (NSURL(string: urlString)!))
+            request.HTTPMethod = "POST"
+            print(urlString)
+            let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
+                print("Response: \(response)")
+                print("Error: \(error)")
+                if (data != nil){
+                    if let strData = NSString(data: data!, encoding: NSUTF8StringEncoding){
+                        print("Body: \(strData)")
+                        if (strData == "success")
+                        {
+                            completion(error:nil)
+                        }else{
+                            completion(error:NSError(domain: "HTTP POST", code: 478, userInfo: nil));
+                        }
+                    }else{
+                        completion(error:NSError(domain: "HTTP POST", code: 479, userInfo: nil));
+                    }
+                }else{
+                    completion(error:NSError(domain: "HTTP POST", code: 480, userInfo: nil));
+                }            })
+            
+            task.resume()
+        }
+        else{
+            completion(error:NSError(domain:"ImageData", code: 477, userInfo: nil));
+        }
+    }
     
     /*
     // MARK: - Navigation
