@@ -116,18 +116,7 @@
                         </connections>
                     </collectionView>
                     <tabBarItem key="tabBarItem" title="Item" id="q6P-7g-gdj"/>
-                    <navigationItem key="navigationItem" id="0Bs-XP-9Xm">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="ioc-lc-0xz">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="u9V-wD-76A">
-                                <rect key="frame" x="16" y="7" width="85" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Contact Info"/>
-                                <connections>
-                                    <segue destination="TeQ-be-tMS" kind="show" id="ADZ-4n-Q5j"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="0Bs-XP-9Xm"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aV9-BV-sFN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -202,7 +191,13 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Item" id="r2G-Cw-QeH"/>
-                    <navigationItem key="navigationItem" id="nCs-GK-ysF"/>
+                    <navigationItem key="navigationItem" id="nCs-GK-ysF">
+                        <barButtonItem key="rightBarButtonItem" image="Contact" id="t12-y6-Ia2">
+                            <connections>
+                                <segue destination="TeQ-be-tMS" kind="show" id="z8A-Qn-Eft"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZVZ-TF-Vte" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -500,11 +495,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kCs-VJ-wac" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2285" y="-556"/>
+            <point key="canvasLocation" x="-1924" y="557"/>
         </scene>
     </scenes>
     <resources>
         <image name="Average$Filled" width="25" height="25"/>
+        <image name="Contact" width="25" height="25"/>
         <image name="Shelf" width="25" height="25"/>
     </resources>
 </document>
