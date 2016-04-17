@@ -174,7 +174,7 @@ class BuyCollectionViewController: UICollectionViewController {
                     newBook.subject = tempBook["Subject"] as! String
                     newBook.title = tempBook["Title"] as! String
                     newBook.vendorType = tempBook["TypeOfPerson"] as! String
-                    newBook.price = Double(tempBook["price"] as! NSNumber)
+                    newBook.price = Double(tempBook["Price"] as! NSNumber)
                     newBook.sellStatus = Int(tempBook["Status"] as! NSNumber)
                     list?.append(newBook)
                     print(list?.count)
@@ -359,6 +359,8 @@ class BuyCollectionViewController: UICollectionViewController {
                     destination.titleName = String(textbookList![indexPath.row].title)
                     destination.ISBNName = String(textbookList![indexPath.row].ISBN)
                     destination.ContactName = String(textbookList![indexPath.row].vendorEmail)
+                    destination.GPSY = textbookList![indexPath.row].GPSY
+                    destination.GPSX = textbookList![indexPath.row].GPSX
                 }
             }
         }

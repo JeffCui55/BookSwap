@@ -11,7 +11,7 @@ import CoreMotion
 import MapKit
 import CoreLocation
 
-class BuyDetailedViewController: UIViewController, CLLocationManagerDelegate {
+class BuyDetailedViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
     @IBOutlet weak var titleText: UILabel!
     var titleName = String()
@@ -23,17 +23,27 @@ class BuyDetailedViewController: UIViewController, CLLocationManagerDelegate {
     var locationManager:CLLocationManager?
     
     @IBOutlet weak var lat: UILabel!
+    var GPSY:Double!
     @IBOutlet weak var long: UILabel!
-    var currentLocation:CLLocation!
+    var GPSX:Double!
     
+    var currentLocation:CLLocation!
+    var annotation = MKPointAnnotation()
     @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444) //currentLocation
+//        let initialLocation = currentLocation
+//        let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
+        self.mapView.delegate = self
+        let initialLocation = CLLocation(latitude: GPSY, longitude: GPSX)
         centerMapOnLocation(initialLocation)
+        annotation.coordinate = CLLocationCoordinate2D(latitude: GPSY, longitude: GPSX)
+        annotation.title = "Book Swap"
+        annotation.subtitle = "Meet to sell your book!"
+        mapView.addAnnotation(annotation)
         // Do any additional setup after loading the view.
     }
     
@@ -64,6 +74,26 @@ class BuyDetailedViewController: UIViewController, CLLocationManagerDelegate {
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+        if let annotation = annotation as? MKAnnotation? {
+            let identifier = "pin"
+            var view: MKPinAnnotationView
+            if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
+                as? MKPinAnnotationView { // 2
+                dequeuedView.annotation = annotation
+                view = dequeuedView
+            } else {
+                // 3
+                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                view.canShowCallout = true
+                view.calloutOffset = CGPoint(x: -5, y: 5)
+                view.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
+            }
+            return view
+        }
+        return nil
+    }
+    
     func displayAlertWithTitle(title: String, message: String){
         let controller = UIAlertController(title: title,
                                            message: message,
@@ -88,8 +118,10 @@ class BuyDetailedViewController: UIViewController, CLLocationManagerDelegate {
         currentLocation = newLocation
         print("Latitude = \(newLocation.coordinate.latitude)")
         print("Longitude = \(newLocation.coordinate.longitude)")
-        lat.text = String(newLocation.coordinate.latitude)
-        long.text = String(newLocation.coordinate.longitude)
+//        lat.text = String(newLocation.coordinate.latitude)
+//        long.text = String(newLocation.coordinate.longitude)
+        lat.text = String(GPSY)
+        long.text = String(GPSX)
         
     }
     
