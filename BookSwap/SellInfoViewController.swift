@@ -8,14 +8,26 @@
 
 import UIKit
 
-class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate,
-    UIPickerViewDataSource {
+class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     @IBOutlet weak var currentImage: UIImageView!
     weak var finalImage:UIImage?
     @IBOutlet weak var conditionPicker: UIPickerView!
     let imagePicker = UIImagePickerController()
     let rdsEndPoint = "http:// ec2-52-91-193-208.compute-1.amazonaws.com/textbooks"
     let pickerData = ["New","Excellent","Good", "Fair", "Poor"]
+    
+    @IBOutlet weak var TitleField: UITextField!
+    @IBOutlet weak var EditionField: UITextField!
+    @IBOutlet weak var AuthorField: UITextField!
+    @IBOutlet weak var ISBNField: UITextField!
+    @IBOutlet weak var PriceField: UITextField!
+    @IBOutlet weak var SubjectField: UITextField!
+    @IBOutlet weak var DescriptionField: UITextField!
+    @IBOutlet weak var submitButton: UIButton!
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,13 +40,27 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         imagePicker.delegate = self
         self.conditionPicker.delegate = self
         self.conditionPicker.dataSource = self
-        
-        
+        submitButton.enabled = false
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SellInfoViewController.fieldsFull(_:)), name: UITextFieldTextDidChangeNotification, object: nil)
+        self.TitleField.delegate = self
+        self.AuthorField.delegate = self
+        self.ISBNField.delegate = self
+        self.PriceField.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func fieldsFull(sender: NSNotification) {
+        if TitleField.hasText() && AuthorField.hasText() && ISBNField.hasText() && PriceField.hasText()
+            && currentImage != nil{
+            submitButton.enabled = true
+        }
+        else {
+            submitButton.enabled = false
+        }
     }
     
     @IBAction func selectAction(sender:AnyObject){
@@ -91,6 +117,21 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         
         return pickerLabel!;
     }
+    
+    // MARK: UITextFieldDelegate Methods
+    func textFieldDidEndEditing(textField: UITextField) {
+        print("textFieldDidEndEditing called")
+        if !textField.hasText() {
+            textField.layer.borderWidth = 1.5
+            textField.layer.borderColor = UIColor.redColor().CGColor
+            print("textField has text")
+        }
+        else {
+            textField.layer.borderWidth = 0
+        }
+    }
+
+ 
     
     // MARK: UIImagePickerControllerDelegate Methods
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {

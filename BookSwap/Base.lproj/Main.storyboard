@@ -286,7 +286,7 @@
                                             <constraint firstAttribute="width" constant="137" id="hkm-gu-DN3"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                     </textField>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubt-CB-lCO">
                                         <rect key="frame" x="157" y="106" width="153" height="75"/>
@@ -329,6 +329,13 @@
                                             <constraint firstAttribute="height" constant="130" id="MV5-Qu-sUP"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKc-pD-srK">
+                                        <rect key="frame" x="8" y="329" width="49" height="30"/>
+                                        <state key="normal" title="Submit"/>
+                                        <connections>
+                                            <action selector="submit" destination="TEL-N2-RII" eventType="touchUpInside" id="kzA-jv-M5a"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="0pZ-NQ-ecF" firstAttribute="top" secondItem="jPe-Ip-6vo" secondAttribute="top" constant="-20" id="2V4-sP-Ieb"/>
@@ -344,6 +351,7 @@
                                     <constraint firstAttribute="trailing" secondItem="ubt-CB-lCO" secondAttribute="trailing" constant="10" id="HvH-bk-Zuw"/>
                                     <constraint firstItem="ubt-CB-lCO" firstAttribute="leading" secondItem="h4V-of-rTh" secondAttribute="trailing" constant="10" id="J0G-9B-8bx"/>
                                     <constraint firstItem="bT9-aE-vlu" firstAttribute="leading" secondItem="h0l-UP-bTz" secondAttribute="trailing" constant="50" id="JIC-Gd-bDZ"/>
+                                    <constraint firstItem="oKc-pD-srK" firstAttribute="leading" secondItem="jPe-Ip-6vo" secondAttribute="leading" constant="9" id="JjX-Wr-hyh"/>
                                     <constraint firstItem="bT9-aE-vlu" firstAttribute="top" secondItem="nyA-ct-6rx" secondAttribute="bottom" constant="12" id="KCf-qJ-mOj"/>
                                     <constraint firstItem="ubt-CB-lCO" firstAttribute="leading" secondItem="jPe-Ip-6vo" secondAttribute="leading" constant="10" id="Mnq-mI-404"/>
                                     <constraint firstItem="ubt-CB-lCO" firstAttribute="top" secondItem="fB8-I0-LsC" secondAttribute="bottom" constant="12" id="NAF-X0-sT1"/>
@@ -360,8 +368,10 @@
                                     <constraint firstAttribute="trailing" secondItem="nyA-ct-6rx" secondAttribute="trailing" constant="10" id="l3g-CY-N9p"/>
                                     <constraint firstItem="nyA-ct-6rx" firstAttribute="top" secondItem="wf4-0h-6DX" secondAttribute="bottom" constant="12" id="lBw-hd-ps6"/>
                                     <constraint firstItem="Wqw-Au-NvG" firstAttribute="top" secondItem="0pZ-NQ-ecF" secondAttribute="bottom" constant="12" id="sJP-xQ-FGH"/>
+                                    <constraint firstItem="oKc-pD-srK" firstAttribute="top" secondItem="h0l-UP-bTz" secondAttribute="bottom" constant="66" id="vQB-0P-78r"/>
                                     <constraint firstAttribute="trailing" secondItem="0pZ-NQ-ecF" secondAttribute="trailing" constant="120" id="vZX-UP-6id"/>
                                     <constraint firstAttribute="bottom" secondItem="0pZ-NQ-ecF" secondAttribute="bottom" constant="337" id="wX7-Cl-WnO"/>
+                                    <constraint firstAttribute="bottom" secondItem="oKc-pD-srK" secondAttribute="bottom" constant="8" id="wiw-Sa-p8m"/>
                                     <constraint firstItem="ubt-CB-lCO" firstAttribute="top" secondItem="fB8-I0-LsC" secondAttribute="bottom" constant="15" id="ywV-pH-zqV"/>
                                 </constraints>
                                 <variation key="default">
@@ -372,6 +382,7 @@
                                         <exclude reference="igA-bk-skf"/>
                                         <exclude reference="Mnq-mI-404"/>
                                         <exclude reference="ywV-pH-zqV"/>
+                                        <exclude reference="wiw-Sa-p8m"/>
                                     </mask>
                                 </variation>
                             </scrollView>
@@ -393,8 +404,16 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="AuthorField" destination="Wqw-Au-NvG" id="qfo-6q-wxr"/>
+                        <outlet property="DescriptionField" destination="nyA-ct-6rx" id="kGJ-fo-01O"/>
+                        <outlet property="EditionField" destination="POt-zZ-fYw" id="U1X-We-krN"/>
+                        <outlet property="ISBNField" destination="fB8-I0-LsC" id="r5H-Qy-zjp"/>
+                        <outlet property="PriceField" destination="h4V-of-rTh" id="o92-1o-igX"/>
+                        <outlet property="SubjectField" destination="wf4-0h-6DX" id="Aq3-I9-hMn"/>
+                        <outlet property="TitleField" destination="0pZ-NQ-ecF" id="SVJ-R3-0hM"/>
                         <outlet property="conditionPicker" destination="ubt-CB-lCO" id="AQC-7Z-hTm"/>
                         <outlet property="currentImage" destination="bT9-aE-vlu" id="LlV-5k-oJI"/>
+                        <outlet property="submitButton" destination="oKc-pD-srK" id="05A-4P-fsp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Huh-ai-0jL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -618,7 +637,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="unh-ah-Sp6">
                                         <rect key="frame" x="20" y="125" width="280" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5iC-2d-er2">
                                         <rect key="frame" x="127" y="238" width="64" height="36"/>
@@ -639,7 +658,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i8G-cs-N1a">
                                         <rect key="frame" x="20" y="188" width="280" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                     </textField>
                                 </subviews>
                                 <constraints>
