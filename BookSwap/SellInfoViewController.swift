@@ -8,19 +8,26 @@
 
 import UIKit
 
-class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate,
+    UIPickerViewDataSource {
     @IBOutlet weak var currentImage: UIImageView!
     weak var finalImage:UIImage?
+    @IBOutlet weak var conditionPicker: UIPickerView!
     let imagePicker = UIImagePickerController()
-    let rdsEndPoint = "http://ec2-52-91-193-208.compute-1.amazonaws.com/textbooks"
+    let rdsEndPoint = "http:// ec2-52-91-193-208.compute-1.amazonaws.com/textbooks"
+    let pickerData = ["New","Excellent","Good", "Fair", "Poor"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imagePicker.delegate = self
-        self.currentImage.contentMode = .ScaleAspectFill         // maintain aspect ratio, fill space
-        self.currentImage.clipsToBounds = true
+//        self.currentImage.contentMode = .ScaleAspectFill         // maintain aspect ratio, fill space
+//        self.currentImage.clipsToBounds = true
 
         // Do any additional setup after loading the view.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SellSignInViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        imagePicker.delegate = self
+        self.conditionPicker.delegate = self
+        self.conditionPicker.dataSource = self
         
         
     }
@@ -50,6 +57,39 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         }
         actionSheet.addAction(choosePhoto)
         self.presentViewController(actionSheet, animated: true, completion: nil)
+    }
+    
+    //MARK: UIPickerView delegate methods
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 5
+    }
+    
+//    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        var thing = pickerData[row]
+//        
+//        return pickerData[row]
+//    }
+    
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+        
+        var pickerLabel = view as? UILabel;
+        
+        if (pickerLabel == nil)
+        {
+            pickerLabel = UILabel()
+            
+            pickerLabel?.font = UIFont(name: "Montserrat", size: 16)
+            pickerLabel?.textAlignment = NSTextAlignment.Center
+        }
+        
+        pickerLabel?.text = pickerData[row]
+        
+        return pickerLabel!;
     }
     
     // MARK: UIImagePickerControllerDelegate Methods
@@ -149,6 +189,11 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         else{
             completion(error:NSError(domain:"ImageData", code: 477, userInfo: nil));
         }
+    }
+    
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     /*
