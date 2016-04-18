@@ -13,7 +13,7 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     weak var finalImage:UIImage?
     @IBOutlet weak var conditionPicker: UIPickerView!
     let imagePicker = UIImagePickerController()
-    let rdsEndPoint = "http:// ec2-52-91-193-208.compute-1.amazonaws.com/textbooks"
+    let rdsEndPoint = "http://ec2-52-91-193-208.compute-1.amazonaws.com/textbooks"
     let pickerData = ["New","Excellent","Good", "Fair", "Poor"]
     
     @IBOutlet weak var TitleField: UITextField!
@@ -25,27 +25,27 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var DescriptionField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     
-    
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.currentImage.contentMode = .ScaleAspectFill         // maintain aspect ratio, fill space
-//        self.currentImage.clipsToBounds = true
 
         // Do any additional setup after loading the view.
+        self.currentImage.contentMode = .ScaleAspectFill
+        self.currentImage.clipsToBounds = true
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SellSignInViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
+        submitButton.enabled = false
+        
+        //delegate setup
         imagePicker.delegate = self
         self.conditionPicker.delegate = self
         self.conditionPicker.dataSource = self
-        submitButton.enabled = false
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SellInfoViewController.fieldsFull(_:)), name: UITextFieldTextDidChangeNotification, object: nil)
         self.TitleField.delegate = self
         self.AuthorField.delegate = self
         self.ISBNField.delegate = self
         self.PriceField.delegate = self
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SellInfoViewController.fieldsFull(_:)), name: UITextFieldTextDidChangeNotification, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -55,7 +55,7 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     
     func fieldsFull(sender: NSNotification) {
         if TitleField.hasText() && AuthorField.hasText() && ISBNField.hasText() && PriceField.hasText()
-            && currentImage != nil{
+            /*&& finalImage != nil*/{
             submitButton.enabled = true
         }
         else {
@@ -138,6 +138,7 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.currentImage.image = pickedImage
             self.finalImage = pickedImage
+            print("Image has been picked")
             if(imagePicker.sourceType == .Camera){
                 let selectorToCall = #selector(SellInfoViewController.imageWasSavedSuccessfully(_:didFinishSavingWithError:context:))
                 UIImageWriteToSavedPhotosAlbum(pickedImage, self, selectorToCall, nil)
@@ -202,10 +203,10 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
             //let requestString:String = "?isbn=1234567891123&title=OnlyInAmerica&edition=2&dateposted=4/21/16&condition=goodish&price=19.99&gpsx=-157.824&gpsy=21.28&image=\(imageData.base64EncodedStringWithOptions([]))&subject=maths&description=pretty_good_but_ive_read_better&phone=4349119111&email=guy@guy.com&top=vendor&status=0";
             
             let requestString:String = "?isbn=1234567891123&title=OnlyInAmerica&edition=2&dateposted=4/21/16&condition=goodish&price=19.99&gpsx=-157.824&gpsy=21.28&image=thing.png&subject=maths&description=pretty_good_but_ive_read_better&phone=4349119111&email=guy@guy.com&top=vendor&status=0";
-            var urlString:String = self.rdsEndPoint + requestString;
-            let request = NSMutableURLRequest(URL: (NSURL(string: urlString)!))
+            let urlString:String = self.rdsEndPoint + requestString;
+            
+            let request = NSMutableURLRequest(URL: (NSURL(string: urlString))!)
             request.HTTPMethod = "POST"
-            print(urlString)
             let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
                 print("Response: \(response)")
                 print("Error: \(error)")

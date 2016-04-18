@@ -42,7 +42,7 @@
             </objects>
             <point key="canvasLocation" x="-2673" y="557"/>
         </scene>
-        <!--Item-->
+        <!--Books For Sale-->
         <scene sceneID="WnD-pH-lnQ">
             <objects>
                 <collectionViewController id="Oaw-5e-bx2" customClass="BuyCollectionViewController" customModule="BookSwap" customModuleProvider="target" sceneMemberID="viewController">
@@ -116,7 +116,7 @@
                         </connections>
                     </collectionView>
                     <tabBarItem key="tabBarItem" title="Item" id="q6P-7g-gdj"/>
-                    <navigationItem key="navigationItem" id="0Bs-XP-9Xm"/>
+                    <navigationItem key="navigationItem" title="Books For Sale" id="0Bs-XP-9Xm"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aV9-BV-sFN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -143,7 +143,7 @@
             </objects>
             <point key="canvasLocation" x="-3159" y="211"/>
         </scene>
-        <!--Item-->
+        <!--Your Books-->
         <scene sceneID="BPh-Of-OP3">
             <objects>
                 <tableViewController id="s25-Sc-hZH" customClass="SellTableViewController" customModule="BookSwap" customModuleProvider="target" sceneMemberID="viewController">
@@ -159,14 +159,16 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gln-Ms-c1K">
-                                            <rect key="frame" x="119" y="7" width="82" height="30"/>
-                                            <state key="normal" title="ADD STUFF"/>
-                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ Add a Book!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TrA-5r-dAm">
+                                            <rect key="frame" x="97" y="9.5" width="126.5" height="24"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <color key="textColor" red="0.0070289468070000001" green="0.4459832051" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="gln-Ms-c1K" firstAttribute="centerX" secondItem="knT-Yb-C2p" secondAttribute="centerX" id="Ff8-OZ-3R0"/>
-                                        <constraint firstItem="gln-Ms-c1K" firstAttribute="centerY" secondItem="knT-Yb-C2p" secondAttribute="centerY" id="KJw-Fd-qlW"/>
+                                        <constraint firstItem="TrA-5r-dAm" firstAttribute="centerX" secondItem="knT-Yb-C2p" secondAttribute="centerX" id="Lr0-5O-bfK"/>
+                                        <constraint firstItem="TrA-5r-dAm" firstAttribute="centerY" secondItem="knT-Yb-C2p" secondAttribute="centerY" id="UMh-ZN-Y2B"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -180,13 +182,13 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Book Title 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F8C-1L-u6T">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book Title 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F8C-1L-u6T">
                                             <rect key="frame" x="20" y="11" width="186" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="$20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1LL-Qs-Rm3">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="$20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1LL-Qs-Rm3">
                                             <rect key="frame" x="256" y="11" width="31" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -217,7 +219,7 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Item" id="r2G-Cw-QeH"/>
-                    <navigationItem key="navigationItem" id="nCs-GK-ysF">
+                    <navigationItem key="navigationItem" title="Your Books" id="nCs-GK-ysF">
                         <barButtonItem key="rightBarButtonItem" image="Contact" id="t12-y6-Ia2">
                             <connections>
                                 <segue destination="TeQ-be-tMS" kind="show" id="z8A-Qn-Eft"/>
@@ -278,7 +280,7 @@
                                             <constraint firstAttribute="width" constant="190" id="4YP-HP-ILQ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Price..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h4V-of-rTh">
                                         <rect key="frame" x="10" y="107" width="137" height="30"/>
@@ -329,8 +331,8 @@
                                             <constraint firstAttribute="height" constant="130" id="MV5-Qu-sUP"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKc-pD-srK">
-                                        <rect key="frame" x="8" y="329" width="49" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKc-pD-srK">
+                                        <rect key="frame" x="9" y="329" width="49" height="30"/>
                                         <state key="normal" title="Submit"/>
                                         <connections>
                                             <action selector="submit" destination="TEL-N2-RII" eventType="touchUpInside" id="kzA-jv-M5a"/>
