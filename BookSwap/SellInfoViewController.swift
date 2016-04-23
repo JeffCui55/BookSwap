@@ -25,6 +25,7 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var DescriptionField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     
+    let prefs = NSUserDefaults.standardUserDefaults()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -193,39 +194,64 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBAction func submit(){
         postData(finalImage!) { (error) -> Void in
             print(error)
+            self.navigationController?.popToRootViewControllerAnimated(true)
+            print("WE DONe IN EHRE")
         }
+        self.navigationController?.popToRootViewControllerAnimated(true)
+        print("WE DONE OUT HERE")
     }
     
     func postData(image: UIImage, completion: (error: NSError?) -> Void){
         let session = NSURLSession.sharedSession()
-        if let imageData = UIImageJPEGRepresentation(image, 0.5)
+        if let imageData = UIImageJPEGRepresentation(image, 0.4)
         {
-            //let requestString:String = "?isbn=1234567891123&title=OnlyInAmerica&edition=2&dateposted=4/21/16&condition=goodish&price=19.99&gpsx=-157.824&gpsy=21.28&image=\(imageData.base64EncodedStringWithOptions([]))&subject=maths&description=pretty_good_but_ive_read_better&phone=4349119111&email=guy@guy.com&top=vendor&status=0";
+        
+            let ISBN = ISBNField.text!
+            let Title = TitleField.text!
+            let Edition = EditionField.text!
+            let DatePosted = NSDate()
+            let Condition = pickerData[conditionPicker.selectedRowInComponent(0)]
+            let Price = PriceField.text!
+            let Image = imageData.base64EncodedStringWithOptions([])
+            //let Image = NSString(data: imageData.base64EncodedDataWithOptions([]), encoding: NSUTF8StringEncoding)
+
+            let Subject = SubjectField.text!
+            let Description = DescriptionField.text!
+            let Phone = prefs.objectForKey("BookSwapContactPhone") as! String
+            let Email = prefs.objectForKey("BookSwapContactEmail") as! String
+            let Top = "Student"
             
-            let requestString:String = "?isbn=1234567891123&title=OnlyInAmerica&edition=2&dateposted=4/21/16&condition=goodish&price=19.99&gpsx=-157.824&gpsy=21.28&image=thing.png&subject=maths&description=pretty_good_but_ive_read_better&phone=4349119111&email=guy@guy.com&top=vendor&status=0";
-            let urlString:String = self.rdsEndPoint + requestString;
+
+            //let requestString:String = "?isbn=1234567891123&title=OnlyInAmerica&edition=2&dateposted=4/21/16&condition=goodish&price=19.99&gpsx=-157.824&gpsy=21.28&image=thing.png&subject=maths&description=pretty_good_but_ive_read_better&phone=4349119111&email=guy@guy.com&top=vendor&status=0";
+            let urlString:String = self.rdsEndPoint
             
             let request = NSMutableURLRequest(URL: (NSURL(string: urlString))!)
             request.HTTPMethod = "POST"
-            let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
-                print("Response: \(response)")
-                print("Error: \(error)")
-                if (data != nil){
-                    if let strData = NSString(data: data!, encoding: NSUTF8StringEncoding){
-                        print("Body: \(strData)")
-                        if (strData == "success")
-                        {
-                            completion(error:nil)
-                        }else{
-                            completion(error:NSError(domain: "HTTP POST", code: 478, userInfo: nil));
-                        }
-                    }else{
-                        completion(error:NSError(domain: "HTTP POST", code: 479, userInfo: nil));
-                    }
-                }else{
-                    completion(error:NSError(domain: "HTTP POST", code: 480, userInfo: nil));
-                }            })
             
+            // Create your request string with parameter name as defined in PHP file
+            let requestString: String = "isbn=\(ISBN)&title=\(Title)&edition=\(Edition)&dateposted=\(DatePosted)&condition=\(Condition)&price=\(Price)&gpsx=-157.824&gpsy=21.28&image=\(Image)&subject=\(Subject)&description=\(Description)&phone=\(Phone)&email=\(Email)&top=\(Top)&status=0"
+
+            //let requestString: String = "title=\(Title)&edition=\(Edition)&dateposted=\(DatePosted)&condition=\(Condition)&price=\(Price)&gpsx=-157.824&gpsy=21.28&image=\(Image)&subject=\(Subject)&description=\(Description)&phone=\(Phone)&email=\(Email)&top=\(Top)&status=0"
+            // Create Data from request
+            let requestData: NSData = NSData(bytes: String(requestString.utf8), length: requestString.characters.count)
+            // Set content-type
+            //request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "content-type")
+            request.HTTPBody = requestData
+            
+            let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+                guard error == nil && data != nil else {                                                          // check for fundamental networking error
+                    print("error=\(error)")
+                    return
+                }
+                
+                if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
+                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                    //print("response = \(response)")
+                }
+                
+                let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                //print("responseString = \(responseString)")
+            }
             task.resume()
         }
         else{
