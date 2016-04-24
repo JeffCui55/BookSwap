@@ -187,12 +187,18 @@ class BuyCollectionViewController: UICollectionViewController {
                     print(indexPath.row)
                     
                     // Create more variables in detailed view and update them here for proper display
-                    destination.titleName = String(textbookList![indexPath.row].title)
-                    destination.ISBNName = String(textbookList![indexPath.row].ISBN)
-                    destination.ContactName = String(textbookList![indexPath.row].vendorEmail)
+                    destination.titleName = textbookList![indexPath.row].title
+                    destination.ISBNName = textbookList![indexPath.row].ISBN
+                    destination.ContactName = textbookList![indexPath.row].vendorEmail
                     destination.GPSY = textbookList![indexPath.row].GPSY
                     destination.GPSX = textbookList![indexPath.row].GPSX
-                    
+                    destination.phoneNumName = textbookList![indexPath.row].vendorPhone
+                    destination.priceName = textbookList![indexPath.row].price
+                    destination.qualityName = textbookList![indexPath.row].condition
+                    destination.editionName = textbookList![indexPath.row].edition
+                    destination.subjectName = textbookList![indexPath.row].subject
+                    destination.descriptionName = textbookList![indexPath.row].itemDescription
+                    //destination.dateName = textbookList![indexPath.row].date
                     let base64String = textbookList![indexPath.row].imageSource
                     let fixedEncoding = base64String!.stringByReplacingOccurrencesOfString(" ", withString: "+")
                     let decodedData = NSData(base64EncodedString: fixedEncoding, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)

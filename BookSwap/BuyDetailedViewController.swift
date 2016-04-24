@@ -22,9 +22,24 @@ class BuyDetailedViewController: UIViewController, CLLocationManagerDelegate, MK
     
     var locationManager:CLLocationManager?
     
-    @IBOutlet weak var lat: UILabel!
+    @IBOutlet weak var editionText: UILabel!
+    var editionName = String()
+    @IBOutlet weak var phoneText: UILabel!
+    var phoneNumName = String()
+    
+    @IBOutlet weak var priceText: UILabel!
+    var priceName: Double = 0.0
+    
+    @IBOutlet weak var qualityText: UILabel!
+    var qualityName = String()
+    
+    @IBOutlet weak var subjectText: UILabel!
+    var subjectName = String()
+    @IBOutlet weak var descriptionText: UILabel!
+    var descriptionName = " "
+    @IBOutlet weak var dateText: UILabel!
+    var dateName = NSDate()
     var GPSY:Double!
-    @IBOutlet weak var long: UILabel!
     var GPSX:Double!
     
     var currentLocation:CLLocation!
@@ -54,6 +69,17 @@ class BuyDetailedViewController: UIViewController, CLLocationManagerDelegate, MK
         titleText.text = titleName
         ISBNText.text = ISBNName
         ContactText.text = ContactName
+        phoneText.text = phoneNumName
+        priceText.text = String(priceName)
+        qualityText.text = qualityName
+        editionText.text = editionName
+        subjectText.text = subjectName
+        descriptionText.text = descriptionName
+//        descriptionText.lineBreakMode = .ByWordWrapping // or NSLineBreakMode.ByWordWrapping
+//        descriptionText.numberOfLines = 0
+        dateText.text = String(dateName)
+//        dateText.lineBreakMode = .ByWordWrapping // or NSLineBreakMode.ByWordWrapping
+//        dateText.numberOfLines = 0
         theImage.image = theImagevar
         theImage.contentMode = .ScaleAspectFit
         
@@ -63,7 +89,7 @@ class BuyDetailedViewController: UIViewController, CLLocationManagerDelegate, MK
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         let screenWidth = screenSize.width
         //let screenHeight = screenSize.height
-        self.scrollView.contentSize = CGSizeMake(screenWidth * 0.9, 2000);
+        self.scrollView.contentSize = CGSizeMake(screenWidth * 0.9, mapView.frame.height + mapView.frame.origin.y + 30);
     }
 
     override func didReceiveMemoryWarning() {
@@ -79,7 +105,7 @@ class BuyDetailedViewController: UIViewController, CLLocationManagerDelegate, MK
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if let annotation = annotation as? MKAnnotation? {
             let identifier = "pin"
             var view: MKPinAnnotationView
@@ -125,8 +151,8 @@ class BuyDetailedViewController: UIViewController, CLLocationManagerDelegate, MK
         print("Longitude = \(newLocation.coordinate.longitude)")
 //        lat.text = String(newLocation.coordinate.latitude)
 //        long.text = String(newLocation.coordinate.longitude)
-        lat.text = String(GPSY)
-        long.text = String(GPSX)
+        //lat.text = String(GPSY)
+        //long.text = String(GPSX)
         
     }
     
