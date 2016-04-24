@@ -77,7 +77,11 @@ class BuyDetailedViewController: UIViewController, CLLocationManagerDelegate, MK
         descriptionText.text = descriptionName
 //        descriptionText.lineBreakMode = .ByWordWrapping // or NSLineBreakMode.ByWordWrapping
 //        descriptionText.numberOfLines = 0
-        dateText.text = String(dateName)
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM/dd/YYYY"
+        let strdate = dateFormatter.stringFromDate(dateName)
+        print(strdate)
+        dateText.text = strdate
 //        dateText.lineBreakMode = .ByWordWrapping // or NSLineBreakMode.ByWordWrapping
 //        dateText.numberOfLines = 0
         theImage.image = theImagevar

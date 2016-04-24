@@ -76,8 +76,10 @@ class BuyCollectionViewController: UICollectionViewController {
                     newBook.condition = tempBook["Condition"] as! String
                     
                     let dateFormatter = NSDateFormatter()
-                    dateFormatter.dateFormat = "MM/dd/YY"
-                    newBook.date = dateFormatter.dateFromString(tempBook["DatePosted"] as! String)
+                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+                    let datestr = (tempBook["DatePosted"] as! String)
+                    let fixeddatestr = datestr.stringByReplacingOccurrencesOfString(" 0000", withString: "+0000")
+                    newBook.date = dateFormatter.dateFromString(fixeddatestr)
                     
                     newBook.itemDescription = tempBook["Description"] as! String
                     newBook.edition = tempBook["Edition"] as! String
@@ -198,7 +200,7 @@ class BuyCollectionViewController: UICollectionViewController {
                     destination.editionName = textbookList![indexPath.row].edition
                     destination.subjectName = textbookList![indexPath.row].subject
                     destination.descriptionName = textbookList![indexPath.row].itemDescription
-                    //destination.dateName = textbookList![indexPath.row].date
+                    destination.dateName = textbookList![indexPath.row].date
                     let base64String = textbookList![indexPath.row].imageSource
                     let fixedEncoding = base64String!.stringByReplacingOccurrencesOfString(" ", withString: "+")
                     let decodedData = NSData(base64EncodedString: fixedEncoding, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
