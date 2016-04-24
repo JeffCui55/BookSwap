@@ -33,6 +33,9 @@ class BuyDetailedViewController: UIViewController, CLLocationManagerDelegate, MK
     
     @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var theImage: UIImageView!
+    var theImagevar:UIImage!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        let initialLocation = currentLocation
@@ -51,6 +54,8 @@ class BuyDetailedViewController: UIViewController, CLLocationManagerDelegate, MK
         titleText.text = titleName
         ISBNText.text = ISBNName
         ContactText.text = ContactName
+        theImage.image = theImagevar
+        theImage.contentMode = .ScaleAspectFit
         
     }
     

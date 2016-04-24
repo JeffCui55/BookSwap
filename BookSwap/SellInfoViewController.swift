@@ -214,6 +214,7 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
             let Price = PriceField.text!
             let Image = imageData.base64EncodedStringWithOptions([])
             //let Image = NSString(data: imageData.base64EncodedDataWithOptions([]), encoding: NSUTF8StringEncoding)
+            //let Image = imageData.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
 
             let Subject = SubjectField.text!
             let Description = DescriptionField.text!

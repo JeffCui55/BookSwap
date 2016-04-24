@@ -707,6 +707,7 @@
                         <outlet property="long" destination="tHo-dC-kOY" id="5sG-Ei-yfE"/>
                         <outlet property="mapView" destination="34K-NP-Mjv" id="NhU-1J-mWz"/>
                         <outlet property="scrollView" destination="nDb-bW-tpl" id="nqx-yY-Vtv"/>
+                        <outlet property="theImage" destination="ZC1-dL-prj" id="81b-M7-9ia"/>
                         <outlet property="titleText" destination="1cx-9f-PRB" id="Mcn-4Z-g2E"/>
                     </connections>
                 </viewController>

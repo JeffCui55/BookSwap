@@ -26,6 +26,7 @@ class BuyCollectionViewController: UICollectionViewController {
         // Register cell classes
         self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView!.alwaysBounceVertical = true
+        self.collectionView!.contentInset = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
 
         // Do any additional setup after loading the view.
 
@@ -143,15 +144,33 @@ class BuyCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        print(textbookList?.count)
-        return (self.textbookList?.count)!
+        if(self.textbookList?.count == nil){
+            return 0;
+        }else{
+            return (self.textbookList?.count)!
+        }
     }
-
+    
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BuyCell", forIndexPath: indexPath) as! BuyCollectionViewCell
         
         cell.itemTitle.text = textbookList![indexPath.row].title
         cell.itemPrice.text = String(textbookList![indexPath.row].price)
+        
+        let base64String = textbookList![indexPath.row].imageSource
+        let fixedEncoding = base64String!.stringByReplacingOccurrencesOfString(" ", withString: "+")
+        let decodedData = NSData(base64EncodedString: fixedEncoding, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
+        let decodedimage = UIImage(data: decodedData!)
+        
+        cell.itemImage.image = decodedimage
+        cell.itemImage.contentMode = UIViewContentMode.ScaleAspectFill
+//        cell.itemImage.clipsToBounds = true
+
+        let totalWidth = self.collectionView!.frame.size.width;
+        let cellDimension = (totalWidth - 16.0 - 10.0) / 2.0;
+        cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cellDimension, cellDimension)
+        cell.layer.cornerRadius = 10
+        cell.layer.masksToBounds = true
         
         return cell
     }
@@ -173,6 +192,12 @@ class BuyCollectionViewController: UICollectionViewController {
                     destination.ContactName = String(textbookList![indexPath.row].vendorEmail)
                     destination.GPSY = textbookList![indexPath.row].GPSY
                     destination.GPSX = textbookList![indexPath.row].GPSX
+                    
+                    let base64String = textbookList![indexPath.row].imageSource
+                    let fixedEncoding = base64String!.stringByReplacingOccurrencesOfString(" ", withString: "+")
+                    let decodedData = NSData(base64EncodedString: fixedEncoding, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
+                    let decodedimage = UIImage(data: decodedData!)
+                    destination.theImagevar = decodedimage
                 }
             }
         }
