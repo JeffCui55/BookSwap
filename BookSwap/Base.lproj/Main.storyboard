@@ -64,27 +64,27 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qJ7-aF-Gkh">
-                                            <rect key="frame" x="0.0" y="10" width="150" height="119"/>
+                                            <rect key="frame" x="0.0" y="10" width="150" height="118"/>
                                             <color key="backgroundColor" red="0.94240507834181075" green="0.94601397728946168" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkh-ge-83d">
-                                            <rect key="frame" x="48.5" y="130" width="98.5" height="20"/>
+                                            <rect key="frame" x="48.5" y="129" width="98.5" height="21"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5P8-z0-sVh">
-                                            <rect key="frame" x="3" y="130" width="35.5" height="20"/>
+                                            <rect key="frame" x="3" y="129" width="35.5" height="21"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7E-lb-J0c">
-                                            <rect key="frame" x="0.0" y="130" width="150" height="20"/>
+                                            <rect key="frame" x="0.0" y="129" width="150" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="20" id="mh8-6t-dUV"/>
+                                                <constraint firstAttribute="height" constant="21" id="mh8-6t-dUV"/>
                                                 <constraint firstAttribute="width" constant="150" id="zS9-QZ-X1M"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
