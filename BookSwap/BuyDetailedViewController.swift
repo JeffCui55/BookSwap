@@ -53,6 +53,7 @@ class BuyDetailedViewController: UIViewController, CLLocationManagerDelegate, MK
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController!.navigationBar.tintColor = UIColor.whiteColor()
 //        let initialLocation = currentLocation
 //        let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
         self.mapView.delegate = self
