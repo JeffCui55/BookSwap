@@ -28,7 +28,7 @@
         <scene sceneID="7bS-gy-Haz">
             <objects>
                 <navigationController id="3ok-qk-VHD" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Sell" image="Average$Filled" selectedImage="Average$Filled" id="Ypo-LI-ed0"/>
+                    <tabBarItem key="tabBarItem" title="Sell" image="Average$" selectedImage="Average$Filled" id="Ypo-LI-ed0"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="D1g-8r-KmP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -947,6 +947,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Average$" width="25" height="25"/>
         <image name="Average$Filled" width="25" height="25"/>
         <image name="Contact" width="25" height="25"/>
         <image name="Shelf" width="25" height="25"/>

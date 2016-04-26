@@ -203,7 +203,7 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     
     func postData(image: UIImage, completion: (error: NSError?) -> Void){
         let session = NSURLSession.sharedSession()
-        if let imageData = UIImageJPEGRepresentation(image, 0.4)
+        if let imageData = UIImageJPEGRepresentation(image, 0.1)
         {
         
             let ISBN = ISBNField.text!

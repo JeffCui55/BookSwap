@@ -13,6 +13,7 @@ class Textbook: NSObject {
     var index:Int!
     var ISBN:String!
     var title:String!
+    var author:String!
     var edition:String!
     var date:NSDate!
     var condition:String!

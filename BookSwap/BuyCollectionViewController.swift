@@ -167,10 +167,23 @@ class BuyCollectionViewController: UICollectionViewController {
         cell.itemImage.image = decodedimage
         cell.itemImage.contentMode = UIViewContentMode.ScaleAspectFill
 //        cell.itemImage.clipsToBounds = true
+//
+//        if(indexPath.row > 1){
+//            let PreviousIndexPath:NSIndexPath = NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)
+//            let cell2 = collectionView.dequeueReusableCellWithReuseIdentifier("BuyCell", forIndexPath: PreviousIndexPath ) as! BuyCollectionViewCell
+//            let pOriginY = cell2.frame.origin.y
+//            let pCellHeight = cell2.frame.height
+//            let totalWidth = self.collectionView!.frame.size.width
+//            let cellDimension = (totalWidth - 16.0 - 10.0) / 2.0
+//            let cellHeight = (decodedimage?.size.height)! * 0.05
+//            cell.frame = CGRectMake(cell.frame.origin.x, pOriginY + pCellHeight, cellDimension, cellHeight)
+//        }else{
+            let totalWidth = self.collectionView!.frame.size.width
+            let cellDimension = (totalWidth - 16.0 - 10.0) / 2.0
+            let cellHeight = (decodedimage?.size.height)! * 0.05
+            cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cellDimension, cellDimension)
 
-        let totalWidth = self.collectionView!.frame.size.width;
-        let cellDimension = (totalWidth - 16.0 - 10.0) / 2.0;
-        cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cellDimension, cellDimension)
+//        }
         cell.layer.cornerRadius = 10
         cell.layer.masksToBounds = true
         
