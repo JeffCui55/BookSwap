@@ -15,7 +15,11 @@ class BuyCollectionViewController: UICollectionViewController {
     var textbookList:[Textbook]! = []
     var refreshControl: UIRefreshControl!
     let url = NSURL(string: "http://ec2-52-91-193-208.compute-1.amazonaws.com/textbooks/")
-
+    var customView: UIView!
+    var refreshLabel:UILabel!
+    var timer: NSTimer!
+    var isAnimating = false
+    var currentColorIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,25 +47,97 @@ class BuyCollectionViewController: UICollectionViewController {
         
         // = UIColor.init(colorLiteralRed: (131/255), green: (169/255), blue: (255/255), alpha: 1)
         // self.collectionView?.backgroundColor = UIColor.init(colorLiteralRed: (60/255), green: (119/255), blue: (255/255), alpha: 1)
+        
+        //refresh control things
+        refreshControl = UIRefreshControl()
+        self.refreshControl.addTarget(self, action: #selector(BuyCollectionViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.backgroundColor = UIColor.clearColor()
+        refreshControl.tintColor = UIColor.clearColor()
+        self.collectionView!.addSubview(self.refreshControl)
+        loadCustomRefreshContents()
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl.attributedTitle = NSAttributedString(string: "Refresh Books!")
-        self.refreshControl.addTarget(self, action: #selector(BuyCollectionViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
-        self.collectionView!.addSubview(self.refreshControl) // not required when using UITableViewController
+        
+    }
+    
+    func loadCustomRefreshContents() {
+        let refreshContents = NSBundle.mainBundle().loadNibNamed("Reload", owner: self, options: nil)
+        customView = refreshContents[0] as! UIView
+        refreshLabel = (customView.viewWithTag(5) as! UILabel)
+        customView.frame = refreshControl.bounds
+        refreshControl.addSubview(customView)
+        
+    }
+    
+    func startTimer() {
+        timer = NSTimer.scheduledTimerWithTimeInterval(4.0, target: self, selector: #selector(BuyCollectionViewController.endRefresh), userInfo: nil, repeats: true)
+    }
+    
+    func endRefresh() {
+        self.refreshControl.endRefreshing()
+        
+        self.refreshLabel.transform = CGAffineTransformIdentity
+        self.refreshLabel.textColor = UIColor.blackColor()
+        timer.invalidate()
+        timer = nil
+        isAnimating = false
     }
     
     func refresh(sender:AnyObject)
     {
+        if refreshControl.refreshing {
+            if !isAnimating {
+                startTimer()
+                animate1()
+            }
+        }
         getBooks(url!){success in
             dispatch_sync(dispatch_get_main_queue()) {
                 self.textbookList = success;
                 self.collectionView?.reloadData()
             }
         }
-        self.refreshControl.endRefreshing()
-
+    }
+    
+    func getNextColor() -> UIColor {
+        var colorsArray: Array<UIColor> = [UIColor.magentaColor(), UIColor.yellowColor(), UIColor.greenColor(), UIColor.blueColor(), UIColor.orangeColor()]
+        
+        if currentColorIndex == colorsArray.count {
+            currentColorIndex = 0
+        }
+        
+        let returnColor = colorsArray[currentColorIndex]
+        currentColorIndex += 1
+        
+        return returnColor
+    }
+    
+    func animate1() {
+        isAnimating = true
+        
+        UIView.animateWithDuration(0.75, delay: 0.5, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+            self.refreshLabel?.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+            self.refreshLabel?.textColor = self.getNextColor()
+            
+            }, completion: { (finished) -> Void in
+                if self.refreshControl.refreshing{
+                    self.animate2()
+                }
+        })
+    }
+    
+    func animate2() {
+        
+        UIView.animateWithDuration(0.75, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+            self.refreshLabel?.transform = CGAffineTransformMakeRotation(CGFloat(M_PI*2))
+            self.refreshLabel?.textColor = self.getNextColor()
+            
+            }, completion: { (finished) -> Void in
+                if self.refreshControl.refreshing{
+                    self.animate1()
+                }
+        })
     }
     
     func getBooks(url:NSURL, completion:(success:[Textbook]) -> Void) {
