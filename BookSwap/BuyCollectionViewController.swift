@@ -40,7 +40,8 @@ class BuyCollectionViewController: UICollectionViewController {
         self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.navigationController!.navigationBar.barTintColor = UIColor.init(colorLiteralRed: (60/255), green: (119/255), blue: (255/255), alpha: 1)
         self.collectionView?.backgroundColor = UIColor.init(colorLiteralRed: (242/255), green: (242/255), blue: (242/255), alpha: 1)
-        self.collectionView?.backgroundView?.backgroundColor = UIColor.init(colorLiteralRed: (131/255), green: (169/255), blue: (255/255), alpha: 1)
+        
+        // = UIColor.init(colorLiteralRed: (131/255), green: (169/255), blue: (255/255), alpha: 1)
         // self.collectionView?.backgroundColor = UIColor.init(colorLiteralRed: (60/255), green: (119/255), blue: (255/255), alpha: 1)
     }
     
@@ -163,7 +164,10 @@ class BuyCollectionViewController: UICollectionViewController {
         
         cell.itemTitle.text = textbookList![indexPath.row].title
         cell.itemPrice.text = String(textbookList![indexPath.row].price)
-        
+        cell.textBackground.backgroundColor = UIColor.init(colorLiteralRed: (131/255), green: (169/255), blue: (255/255), alpha: 1)
+        self.collectionView?.sendSubviewToBack(cell.textBackground)
+        cell.itemPrice.layer.zPosition = 1
+        cell.itemTitle.layer.zPosition = 1
         let base64String = textbookList![indexPath.row].imageSource
         let fixedEncoding = base64String!.stringByReplacingOccurrencesOfString(" ", withString: "+")
         let decodedData = NSData(base64EncodedString: fixedEncoding, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
