@@ -176,6 +176,7 @@ class BuyCollectionViewController: UICollectionViewController {
                     newBook.vendorPhone = tempBook["Phone"] as! String
                     newBook.subject = tempBook["Subject"] as! String
                     newBook.title = tempBook["Title"] as! String
+                    newBook.author = tempBook["Author"] as! String
                     newBook.vendorType = tempBook["TypeOfPerson"] as! String
                     newBook.price = Double(tempBook["Price"] as! NSNumber)
                     newBook.sellStatus = Int(tempBook["Status"] as! NSNumber)
@@ -265,7 +266,7 @@ class BuyCollectionViewController: UICollectionViewController {
 //        }else{
             let totalWidth = self.collectionView!.frame.size.width
             let cellDimension = (totalWidth - 16.0 - 10.0) / 2.0
-            let cellHeight = (decodedimage?.size.height)! * 0.05
+            //let cellHeight = (decodedimage?.size.height)! * 0.05
             cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cellDimension, cellDimension)
 
 //        }
