@@ -290,6 +290,7 @@ class BuyCollectionViewController: UICollectionViewController {
                     
                     // Create more variables in detailed view and update them here for proper display
                     destination.titleName = textbookList![indexPath.row].title
+                    destination.authorName = textbookList![indexPath.row].author
                     destination.ISBNName = textbookList![indexPath.row].ISBN
                     destination.ContactName = textbookList![indexPath.row].vendorEmail
                     destination.GPSY = textbookList![indexPath.row].GPSY
