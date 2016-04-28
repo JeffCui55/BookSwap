@@ -56,6 +56,9 @@ class BuyCollectionViewController: UICollectionViewController {
         refreshControl.tintColor = UIColor.clearColor()
         self.collectionView!.addSubview(self.refreshControl)
         loadCustomRefreshContents()
+        
+        print(UIDevice.currentDevice().identifierForVendor!.UUIDString)
+
     }
     
     override func viewDidAppear(animated: Bool) {

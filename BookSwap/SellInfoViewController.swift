@@ -265,17 +265,7 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func postData(image: UIImage, completion: (error: NSError?) -> Void){
-        let session = NSURLSession.sharedSession()
-//        var alertString = "Please provide an image of your textbook!"
-//        if(prefs.objectForKey("BookSwapContactName")  as! String == "" && (prefs.objectForKey("BookSwapContactEmail") as! String == "" ||
-//            prefs.objectForKey("BookSwapContactPhone") as! String == "")){
-//            alertString = "Please provide an image of your textbook, your name and a way to contact you!"
-//            let alert = UIAlertController(title: "Incomplete", message: alertString, preferredStyle: UIAlertControllerStyle.Alert)
-//            alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.Default, handler: nil))
-//            self.presentViewController(alert, animated: true, completion: nil)
-//        }
-
-
+        
         if let imageData = UIImageJPEGRepresentation(image, 0.1)
         {
         
@@ -324,17 +314,17 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
                     //print("response = \(response)")
                 }
                 
-                let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                //let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
                 //print("responseString = \(responseString)")
             }
             task.resume()
         }
         else {
-//            let alertString = "Please provide an image of your textbook, your name and a way to contact you!"
-//            let alert = UIAlertController(title: "Incomplete", message: alertString, preferredStyle: UIAlertControllerStyle.Alert)
-//            alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.Default, handler: nil))
-//            self.presentViewController(alert, animated: true, completion: nil)
-            completion(error:NSError(domain:"ImageData", code: 477, userInfo: nil));
+            let alertString = "The image you provided was not valid, please try again"
+            let alert = UIAlertController(title: "Incomplete", message: alertString, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+//            completion(error:NSError(domain:"ImageData", code: 477, userInfo: nil));
         }
     }
     
