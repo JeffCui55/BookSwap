@@ -16,7 +16,7 @@ class BuyCollectionViewController: UICollectionViewController {
     var refreshControl: UIRefreshControl!
     let url = NSURL(string: "http://ec2-52-91-193-208.compute-1.amazonaws.com/textbooks/")
     var customView: UIView!
-    var refreshLabel:UILabel!
+    var refreshImage:UIImageView!
     var timer: NSTimer!
     var isAnimating = false
     var currentColorIndex = 0
@@ -65,21 +65,20 @@ class BuyCollectionViewController: UICollectionViewController {
     func loadCustomRefreshContents() {
         let refreshContents = NSBundle.mainBundle().loadNibNamed("Reload", owner: self, options: nil)
         customView = refreshContents[0] as! UIView
-        refreshLabel = (customView.viewWithTag(5) as! UILabel)
+        refreshImage = (customView.viewWithTag(5) as! UIImageView)
         customView.frame = refreshControl.bounds
         refreshControl.addSubview(customView)
         
     }
     
     func startTimer() {
-        timer = NSTimer.scheduledTimerWithTimeInterval(4.0, target: self, selector: #selector(BuyCollectionViewController.endRefresh), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(BuyCollectionViewController.endRefresh), userInfo: nil, repeats: true)
     }
     
     func endRefresh() {
         self.refreshControl.endRefreshing()
         
-        self.refreshLabel.transform = CGAffineTransformIdentity
-        self.refreshLabel.textColor = UIColor.blackColor()
+        self.refreshImage.transform = CGAffineTransformIdentity
         timer.invalidate()
         timer = nil
         isAnimating = false
@@ -117,9 +116,8 @@ class BuyCollectionViewController: UICollectionViewController {
     func animate1() {
         isAnimating = true
         
-        UIView.animateWithDuration(0.75, delay: 0.5, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
-            self.refreshLabel?.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
-            self.refreshLabel?.textColor = self.getNextColor()
+        UIView.animateWithDuration(0.75, delay: 0.4, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+            self.refreshImage?.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
             
             }, completion: { (finished) -> Void in
                 if self.refreshControl.refreshing{
@@ -131,8 +129,7 @@ class BuyCollectionViewController: UICollectionViewController {
     func animate2() {
         
         UIView.animateWithDuration(0.75, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
-            self.refreshLabel?.transform = CGAffineTransformMakeRotation(CGFloat(M_PI*2))
-            self.refreshLabel?.textColor = self.getNextColor()
+            self.refreshImage?.transform = CGAffineTransformMakeRotation(CGFloat(M_PI*2))
             
             }, completion: { (finished) -> Void in
                 if self.refreshControl.refreshing{
