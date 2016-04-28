@@ -246,13 +246,20 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
             self.presentViewController(alert, animated: true, completion: nil)
         }
         else {
-            postData(finalImage!) { (error) -> Void in
-                print(error)
+            if(finalImage != nil){
+                postData(finalImage!) { (error) -> Void in
+                    print(error)
+                    self.navigationController?.popToRootViewControllerAnimated(true)
+                    print("WE DONe IN EHRE")
+                }
                 self.navigationController?.popToRootViewControllerAnimated(true)
-                print("WE DONe IN EHRE")
+                print("WE DONE OUT HERE")
+            }else{
+                let alertString = "Please provide an image of your textbook!"
+                let alert = UIAlertController(title: "Incomplete", message: alertString, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
             }
-            self.navigationController?.popToRootViewControllerAnimated(true)
-            print("WE DONE OUT HERE")
         }
 
     }
@@ -323,6 +330,7 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
             task.resume()
         }
         else {
+//            let alertString = "Please provide an image of your textbook, your name and a way to contact you!"
 //            let alert = UIAlertController(title: "Incomplete", message: alertString, preferredStyle: UIAlertControllerStyle.Alert)
 //            alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.Default, handler: nil))
 //            self.presentViewController(alert, animated: true, completion: nil)
