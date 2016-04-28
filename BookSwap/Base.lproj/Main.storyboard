@@ -148,9 +148,7 @@
                         </connections>
                     </collectionView>
                     <tabBarItem key="tabBarItem" title="Item" id="q6P-7g-gdj"/>
-                    <navigationItem key="navigationItem" title="Books For Sale" id="0Bs-XP-9Xm">
-                        <barButtonItem key="rightBarButtonItem" image="Contact" id="hgR-qP-p5y"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Books For Sale" id="0Bs-XP-9Xm"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aV9-BV-sFN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -878,13 +876,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="l4l-Zv-QeA">
-                        <barButtonItem key="rightBarButtonItem" image="Contact" id="iga-PZ-Ng0">
-                            <connections>
-                                <segue destination="TeQ-be-tMS" kind="show" id="3So-Rn-eKI"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="l4l-Zv-QeA"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="ContactText" destination="svK-Kn-Etw" id="LVF-1v-HkS"/>
@@ -1026,6 +1018,6 @@
         <image name="Shelf" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3So-Rn-eKI"/>
+        <segue reference="z8A-Qn-Eft"/>
     </inferredMetricsTieBreakers>
 </document>
