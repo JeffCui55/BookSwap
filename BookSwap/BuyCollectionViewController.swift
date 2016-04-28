@@ -43,6 +43,7 @@ class BuyCollectionViewController: UICollectionViewController {
         
         self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.navigationController!.navigationBar.barTintColor = UIColor.init(colorLiteralRed: (60/255), green: (119/255), blue: (255/255), alpha: 1)
+        self.navigationController!.navigationBar.tintColor = UIColor.whiteColor()
         self.collectionView?.backgroundColor = UIColor.init(colorLiteralRed: (242/255), green: (242/255), blue: (242/255), alpha: 1)
         
         // = UIColor.init(colorLiteralRed: (131/255), green: (169/255), blue: (255/255), alpha: 1)

@@ -152,8 +152,8 @@ class BuyDetailedViewController: UIViewController, CLLocationManagerDelegate, MK
         
         let newLocation = locations[0]
         currentLocation = newLocation
-        print("Latitude = \(newLocation.coordinate.latitude)")
-        print("Longitude = \(newLocation.coordinate.longitude)")
+//        print("Latitude = \(newLocation.coordinate.latitude)")
+//        print("Longitude = \(newLocation.coordinate.longitude)")
 //        lat.text = String(newLocation.coordinate.latitude)
 //        long.text = String(newLocation.coordinate.longitude)
         //lat.text = String(GPSY)
