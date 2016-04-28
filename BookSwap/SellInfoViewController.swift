@@ -236,17 +236,38 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
             }
     
     @IBAction func submit(){
-        postData(finalImage!) { (error) -> Void in
-            print(error)
-            self.navigationController?.popToRootViewControllerAnimated(true)
-            print("WE DONe IN EHRE")
+        var alertString = "Please provide an image of your textbook!"
+        if((prefs.objectForKey("BookSwapContactName")  == nil || prefs.objectForKey("BookSwapContactName")  as! String == "" ) && (prefs.objectForKey("BookSwapContactEmail")  == nil || prefs.objectForKey("BookSwapContactEmail") as! String == "" ||
+            prefs.objectForKey("BookSwapContactPhone") == nil || prefs.objectForKey("BookSwapContactPhone") as! String == "")){
+            alertString = "Please provide an image of your textbook, your name and a way to contact you!"
+            let alert = UIAlertController(title: "Incomplete", message: alertString, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
         }
-        self.navigationController?.popToRootViewControllerAnimated(true)
-        print("WE DONE OUT HERE")
+        else {
+            postData(finalImage!) { (error) -> Void in
+                print(error)
+                self.navigationController?.popToRootViewControllerAnimated(true)
+                print("WE DONe IN EHRE")
+            }
+            self.navigationController?.popToRootViewControllerAnimated(true)
+            print("WE DONE OUT HERE")
+        }
+
     }
     
     func postData(image: UIImage, completion: (error: NSError?) -> Void){
         let session = NSURLSession.sharedSession()
+//        var alertString = "Please provide an image of your textbook!"
+//        if(prefs.objectForKey("BookSwapContactName")  as! String == "" && (prefs.objectForKey("BookSwapContactEmail") as! String == "" ||
+//            prefs.objectForKey("BookSwapContactPhone") as! String == "")){
+//            alertString = "Please provide an image of your textbook, your name and a way to contact you!"
+//            let alert = UIAlertController(title: "Incomplete", message: alertString, preferredStyle: UIAlertControllerStyle.Alert)
+//            alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.Default, handler: nil))
+//            self.presentViewController(alert, animated: true, completion: nil)
+//        }
+
+
         if let imageData = UIImageJPEGRepresentation(image, 0.1)
         {
         
@@ -300,7 +321,10 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
             }
             task.resume()
         }
-        else{
+        else {
+//            let alert = UIAlertController(title: "Incomplete", message: alertString, preferredStyle: UIAlertControllerStyle.Alert)
+//            alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.Default, handler: nil))
+//            self.presentViewController(alert, animated: true, completion: nil)
             completion(error:NSError(domain:"ImageData", code: 477, userInfo: nil));
         }
     }
