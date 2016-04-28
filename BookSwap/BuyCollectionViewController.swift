@@ -182,6 +182,8 @@ class BuyCollectionViewController: UICollectionViewController {
                     newBook.vendorType = tempBook["TypeOfPerson"] as! String
                     newBook.price = Double(tempBook["Price"] as! NSNumber)
                     newBook.sellStatus = Int(tempBook["Status"] as! NSNumber)
+                    newBook.vendorName = tempBook["Name"] as! String
+                    newBook.vendorDeviceID = tempBook["DeviceID"] as! String
                     list?.append(newBook)
                     print(list?.count)
                 }

@@ -243,6 +243,10 @@
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="bookPrice" destination="1LL-Qs-Rm3" id="0gC-6L-Lbk"/>
+                                    <outlet property="bookTitle" destination="F8C-1L-u6T" id="IUL-bq-cSA"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

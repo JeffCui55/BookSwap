@@ -10,6 +10,9 @@ import UIKit
 
 class SellTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var bookTitle: UILabel!
+    @IBOutlet weak var bookPrice: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

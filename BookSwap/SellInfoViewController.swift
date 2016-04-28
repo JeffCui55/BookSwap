@@ -63,6 +63,7 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         // Dispose of any resources that can be recreated.
     }
     
+    // Method that makes submit button unclickable/clickable depending on if the fields are full
     func fieldsFull(sender: NSNotification) {
         if TitleField.hasText() && AuthorField.hasText() && ISBNField.hasText() && PriceField.hasText()
             /*&& finalImage != nil*/{
@@ -73,6 +74,7 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         }
     }
     
+    // Called when trying add image, gives choice of camera or gallery
     @IBAction func selectAction(sender:AnyObject){
         let actionSheet: UIAlertController = UIAlertController(title: "Choose An Image", message: "", preferredStyle: .ActionSheet)
         
@@ -209,6 +211,7 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         imagePicker.sourceType = .PhotoLibrary
         presentViewController(imagePicker, animated: true, completion: nil)
     }
+    
     // launch camera to take a picture
     func takePicture() {
         if (UIImagePickerController.isSourceTypeAvailable(.Camera)) {
@@ -235,12 +238,13 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
                 }
             }
     
+    // called when submit button is pressed, checks to make sure seller info and image is complete
     @IBAction func submit(){
-        var alertString = "Please provide an image of your textbook!"
         if((prefs.objectForKey("BookSwapContactName")  == nil || prefs.objectForKey("BookSwapContactName")  as! String == "" ) && (prefs.objectForKey("BookSwapContactEmail")  == nil || prefs.objectForKey("BookSwapContactEmail") as! String == "" ||
-            prefs.objectForKey("BookSwapContactPhone") == nil || prefs.objectForKey("BookSwapContactPhone") as! String == "" ||
-            finalImage == nil || CGSizeEqualToSize(finalImage!.size, CGSizeZero))){
-            alertString = "Please provide an image of your textbook, your name and a way to contact you!"
+            prefs.objectForKey("BookSwapContactPhone") == nil || prefs.objectForKey("BookSwapContactPhone") as! String == "" //||
+           // finalImage == nil || CGSizeEqualToSize(finalImage!.size, CGSizeZero)
+            )){
+            let alertString = "Please provide an image of your textbook, your name and a way to contact you!"
             let alert = UIAlertController(title: "Incomplete", message: alertString, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
@@ -251,6 +255,7 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
                     print(error)
                     self.navigationController?.popToRootViewControllerAnimated(true)
                     print("WE DONe IN EHRE")
+                    //self.grabSellerData()
                 }
                 self.navigationController?.popToRootViewControllerAnimated(true)
                 print("WE DONE OUT HERE")
@@ -264,6 +269,7 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
 
     }
     
+    // called from submit() and posts data to server
     func postData(image: UIImage, completion: (error: NSError?) -> Void){
         
         if let imageData = UIImageJPEGRepresentation(image, 0.1)
@@ -285,8 +291,9 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
             let Description = DescriptionField.text!
             let Phone = prefs.objectForKey("BookSwapContactPhone") as! String
             let Email = prefs.objectForKey("BookSwapContactEmail") as! String
+            let Name = prefs.objectForKey("BookSwapContactName") as! String
             let Top = "Student"
-            
+            let SellerID = UIDevice.currentDevice().identifierForVendor!.UUIDString
 
             let urlString:String = self.rdsEndPoint
             
@@ -294,8 +301,7 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
             request.HTTPMethod = "POST"
             
 
-            let requestString: String = "isbn=\(ISBN)&title=\(Title)&author=\(Author)&edition=\(Edition)&dateposted=\(DatePosted)&condition=\(Condition)&price=\(Price)&gpsx=-157.824&gpsy=21.28&image=\(Image)&subject=\(Subject)&description=\(Description)&phone=\(Phone)&email=\(Email)&top=\(Top)&status=0"
-
+            let requestString: String = "isbn=\(ISBN)&title=\(Title)&author=\(Author)&edition=\(Edition)&dateposted=\(DatePosted)&condition=\(Condition)&price=\(Price)&gpsx=-157.824&gpsy=21.28&image=\(Image)&subject=\(Subject)&description=\(Description)&phone=\(Phone)&email=\(Email)&top=\(Top)&status=0&name=\(Name)&deviceid=\(SellerID)"
             
             // Create Data from request
             let requestData: NSData = NSData(bytes: String(requestString.utf8), length: requestString.characters.count)
@@ -308,6 +314,7 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
                     print("error=\(error)")
                     return
                 }
+                //print(response)
                 
                 if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
                     print("statusCode should be 200, but is \(httpStatus.statusCode)")
@@ -326,6 +333,25 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
             self.presentViewController(alert, animated: true, completion: nil)
 //            completion(error:NSError(domain:"ImageData", code: 477, userInfo: nil));
         }
+    }
+    
+    func grabSellerData(){
+        let deviceID = UIDevice.currentDevice().identifierForVendor!.UUIDString
+        getSellerData(deviceID){success in
+            dispatch_sync(dispatch_get_main_queue()) {
+                self.textbookArray = success
+                let data = NSKeyedArchiver.archivedDataWithRootObject(self.textbookArray)
+                self.prefs.setObject(data, forKey: "TheData")
+                self.prefs.synchronize()
+                NSNotificationCenter.defaultCenter().postNotificationName("load", object: nil)
+            }
+            
+        }
+        
+    }
+    
+    func getSellerData(deviceID: String, completion:(success:[Textbook]) -> Void){
+        
     }
     
     func dismissKeyboard() {

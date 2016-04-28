@@ -24,9 +24,11 @@ class Textbook: NSObject {
     var imageSource:String! //we'll allow null until we can fix it
     var subject:String!
     var itemDescription:String!
+    var vendorName:String!
     var vendorPhone:String!
     var vendorEmail:String!
     var vendorType:String!
     var sellStatus:Int!
+    var vendorDeviceID:String!
     
 }

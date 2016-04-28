@@ -32,6 +32,9 @@ class SellTableViewController: UITableViewController {
             let decodeData = prefs.objectForKey("TheData") as! NSData
             textbookArray = NSKeyedUnarchiver.unarchiveObjectWithData(decodeData) as! [Textbook]
         }
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadList:",name:"load", object: nil)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,8 +42,13 @@ class SellTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func loadList(notification: NSNotification){
+        //load data here
+        self.tableView.reloadData()
+    }
+    
+    
     // MARK: - Table view data source
-
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
