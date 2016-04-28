@@ -9,6 +9,8 @@
 import UIKit
 
 class SellTableViewController: UITableViewController {
+    let prefs = NSUserDefaults.standardUserDefaults()
+    var textbookArray = [Textbook]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +22,16 @@ class SellTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        if((prefs.objectForKey("TheData")) == nil){
+            let data = NSKeyedArchiver.archivedDataWithRootObject(textbookArray)
+            prefs.setObject(data, forKey: "TheData")
+            prefs.synchronize()
+        }
+        else{
+            let decodeData = prefs.objectForKey("TheData") as! NSData
+            textbookArray = NSKeyedUnarchiver.unarchiveObjectWithData(decodeData) as! [Textbook]
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,7 +48,7 @@ class SellTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 5
+        return 1 + textbookArray.count
     }
 
     
@@ -46,7 +58,11 @@ class SellTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCellWithIdentifier("AddSale", forIndexPath: indexPath)
             return cell
         }else{
-            let cell = tableView.dequeueReusableCellWithIdentifier("ItemSold", forIndexPath: indexPath)
+            var currentRow = indexPath.row - 1
+            let cell = tableView.dequeueReusableCellWithIdentifier("ItemSold", forIndexPath: indexPath) as! SellTableViewCell
+            
+            
+            
             return cell
         }
     }

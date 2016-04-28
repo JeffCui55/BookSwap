@@ -9,6 +9,7 @@
 import UIKit
 
 class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+    
     @IBOutlet weak var currentImage: UIImageView!
     weak var finalImage:UIImage?
     @IBOutlet weak var conditionPicker: UIPickerView!
@@ -26,12 +27,14 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var submitButton: UIButton!
     
     let prefs = NSUserDefaults.standardUserDefaults()
+    var textbookArray = [Textbook]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.navigationController!.navigationBar.barTintColor = UIColor.init(colorLiteralRed: (60/255), green: (119/255), blue: (255/255), alpha: 1)
         self.navigationController!.navigationBar.tintColor = UIColor.whiteColor()
+        
         // Do any additional setup after loading the view.
         self.currentImage.contentMode = .ScaleAspectFill
         self.currentImage.clipsToBounds = true
@@ -49,6 +52,10 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         self.PriceField.delegate = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SellInfoViewController.fieldsFull(_:)), name: UITextFieldTextDidChangeNotification, object: nil)
+        
+        let decodeData = prefs.objectForKey("TheData") as! NSData
+        textbookArray = NSKeyedUnarchiver.unarchiveObjectWithData(decodeData) as! [Textbook]
+
     }
     
     override func didReceiveMemoryWarning() {
