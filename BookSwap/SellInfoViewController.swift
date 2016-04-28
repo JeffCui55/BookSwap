@@ -238,7 +238,8 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBAction func submit(){
         var alertString = "Please provide an image of your textbook!"
         if((prefs.objectForKey("BookSwapContactName")  == nil || prefs.objectForKey("BookSwapContactName")  as! String == "" ) && (prefs.objectForKey("BookSwapContactEmail")  == nil || prefs.objectForKey("BookSwapContactEmail") as! String == "" ||
-            prefs.objectForKey("BookSwapContactPhone") == nil || prefs.objectForKey("BookSwapContactPhone") as! String == "")){
+            prefs.objectForKey("BookSwapContactPhone") == nil || prefs.objectForKey("BookSwapContactPhone") as! String == "" ||
+            finalImage == nil || CGSizeEqualToSize(finalImage!.size, CGSizeZero))){
             alertString = "Please provide an image of your textbook, your name and a way to contact you!"
             let alert = UIAlertController(title: "Incomplete", message: alertString, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.Default, handler: nil))
