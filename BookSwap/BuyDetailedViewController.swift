@@ -27,6 +27,8 @@ class BuyDetailedViewController: UIViewController, CLLocationManagerDelegate, MK
     @IBOutlet weak var phoneText: UILabel!
     var phoneNumName = String()
     
+    @IBOutlet weak var personText: UILabel!
+    var personName = String()
     @IBOutlet weak var authorText: UILabel!
     var authorName = String()
     @IBOutlet weak var priceText: UILabel!
@@ -79,6 +81,7 @@ class BuyDetailedViewController: UIViewController, CLLocationManagerDelegate, MK
         subjectText.text = subjectName
         descriptionText.text = descriptionName
         authorText.text = authorName
+        personText.text = personName
 //        descriptionText.lineBreakMode = .ByWordWrapping // or NSLineBreakMode.ByWordWrapping
 //        descriptionText.numberOfLines = 0
         let dateFormatter = NSDateFormatter()

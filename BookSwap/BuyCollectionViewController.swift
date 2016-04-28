@@ -305,6 +305,7 @@ class BuyCollectionViewController: UICollectionViewController {
                     destination.subjectName = textbookList![indexPath.row].subject
                     destination.descriptionName = textbookList![indexPath.row].itemDescription
                     destination.dateName = textbookList![indexPath.row].date
+                    destination.personName = textbookList![indexPath.row].vendorName
                     let base64String = textbookList![indexPath.row].imageSource
                     let fixedEncoding = base64String!.stringByReplacingOccurrencesOfString(" ", withString: "+")
                     let decodedData = NSData(base64EncodedString: fixedEncoding, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
