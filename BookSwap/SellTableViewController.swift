@@ -44,6 +44,7 @@ class SellTableViewController: UITableViewController {
 
     func loadList(notification: NSNotification){
         //load data here
+        print("inside loadlist")
         self.tableView.reloadData()
     }
     

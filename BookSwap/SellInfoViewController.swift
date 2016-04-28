@@ -251,14 +251,18 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         }
         else {
             if(finalImage != nil){
-                postData(finalImage!) { (error) -> Void in
-                    print(error)
-                    self.navigationController?.popToRootViewControllerAnimated(true)
+                postData(finalImage!) { (Status) -> Void in
                     print("WE DONe IN EHRE")
-                    //self.grabSellerData()
+                    print(Status)
+                    if Status == true {
+                        self.grabSellerData()
+                    }
+                    //self.navigationController?.popToRootViewControllerAnimated(true)
                 }
-                self.navigationController?.popToRootViewControllerAnimated(true)
+                //self.navigationController?.popToRootViewControllerAnimated(true)
                 print("WE DONE OUT HERE")
+                //self.grabSellerData()
+
             }else{
                 let alertString = "Please provide an image of your textbook!"
                 let alert = UIAlertController(title: "Incomplete", message: alertString, preferredStyle: UIAlertControllerStyle.Alert)
@@ -270,7 +274,7 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     // called from submit() and posts data to server
-    func postData(image: UIImage, completion: (error: NSError?) -> Void){
+    func postData(image: UIImage, completion: (Status: Bool) -> Void){
         
         if let imageData = UIImageJPEGRepresentation(image, 0.1)
         {
@@ -324,6 +328,7 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
                 //let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
                 //print("responseString = \(responseString)")
             }
+            completion(Status: true)
             task.resume()
         }
         else {
@@ -336,6 +341,7 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func grabSellerData(){
+        print("in grabSellerData")
         let deviceID = UIDevice.currentDevice().identifierForVendor!.UUIDString
         getSellerData(deviceID){success in
             dispatch_sync(dispatch_get_main_queue()) {
@@ -344,16 +350,49 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
                 self.prefs.setObject(data, forKey: "TheData")
                 self.prefs.synchronize()
                 NSNotificationCenter.defaultCenter().postNotificationName("load", object: nil)
+                //self.navigationController?.popToRootViewControllerAnimated(true)
+
             }
-            
         }
-        
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
     func getSellerData(deviceID: String, completion:(success:[Textbook]) -> Void){
+        print("in getSellerData")
+        let urlString:String = self.rdsEndPoint + "/sell"
         
-    }
+        let request = NSMutableURLRequest(URL: (NSURL(string: urlString))!)
+        request.HTTPMethod = "POST"
+        
+        
+        let requestString: String = "deviceid=\(deviceID)"
+        
+        // Create Data from request
+        let requestData: NSData = NSData(bytes: String(requestString.utf8), length: requestString.characters.count)
+        // Set content-type
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "content-type")
+        request.HTTPBody = requestData
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+            guard error == nil && data != nil else {                                                          // check for fundamental networking error
+                print("error=\(error)")
+                return
+            }
+            //print(response)
+            
+            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                //print("response = \(response)")
+            }
+            
+            let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+            print("responseString = \(responseString)")
+        }
+        task.resume()
     
+
+    }
+
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
