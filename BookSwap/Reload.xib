@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Loading" translatesAutoresizingMaskIntoConstraints="NO" id="UHI-sb-5c2">
-                    <rect key="frame" x="275" y="5" width="50" height="50"/>
+                    <rect key="frame" x="270" y="5" width="50" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="eUn-qN-SHU"/>
                         <constraint firstAttribute="width" constant="50" id="veq-RX-UN0"/>
@@ -21,7 +21,7 @@
             </subviews>
             <constraints>
                 <constraint firstItem="UHI-sb-5c2" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="UHk-hb-0el"/>
-                <constraint firstItem="UHI-sb-5c2" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="uhm-3v-bnw"/>
+                <constraint firstItem="UHI-sb-5c2" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-5" id="uhm-3v-bnw"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

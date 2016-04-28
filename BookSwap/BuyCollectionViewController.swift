@@ -67,12 +67,13 @@ class BuyCollectionViewController: UICollectionViewController {
         customView = refreshContents[0] as! UIView
         refreshImage = (customView.viewWithTag(5) as! UIImageView)
         customView.frame = refreshControl.bounds
+        customView.clipsToBounds = true;
         refreshControl.addSubview(customView)
         
     }
     
     func startTimer() {
-        timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(BuyCollectionViewController.endRefresh), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(BuyCollectionViewController.endRefresh), userInfo: nil, repeats: true)
     }
     
     func endRefresh() {
@@ -116,7 +117,7 @@ class BuyCollectionViewController: UICollectionViewController {
     func animate1() {
         isAnimating = true
         
-        UIView.animateWithDuration(0.75, delay: 0.4, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+        UIView.animateWithDuration(0.5, delay: 0.1, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
             self.refreshImage?.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
             
             }, completion: { (finished) -> Void in
@@ -128,7 +129,7 @@ class BuyCollectionViewController: UICollectionViewController {
     
     func animate2() {
         
-        UIView.animateWithDuration(0.75, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+        UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
             self.refreshImage?.transform = CGAffineTransformMakeRotation(CGFloat(M_PI*2))
             
             }, completion: { (finished) -> Void in
