@@ -53,7 +53,7 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         self.AuthorField.delegate = self
         self.ISBNField.delegate = self
         self.PriceField.delegate = self
-        
+        self.EditionField.delegate = self
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SellInfoViewController.fieldsFull(_:)), name: UITextFieldTextDidChangeNotification, object: nil)
         
         let decodeData = prefs.objectForKey("TheData") as! NSData
@@ -164,8 +164,11 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
                 prospectiveText.characters.count <= 13
         
         case PriceField:
-            return isNumeric(prospectiveText) && doesNotContainCharactersIn(prospectiveText, matchCharacters: "-e") &&
-                prospectiveText.characters.count <= 10
+            return containsOnlyCharactersIn(prospectiveText, matchCharacters: "0123456789") &&
+                prospectiveText.characters.count <= 4
+        case EditionField:
+            return containsOnlyCharactersIn(prospectiveText, matchCharacters: "0123456789") &&
+                prospectiveText.characters.count <= 2
 
         default:
             return true
