@@ -249,9 +249,8 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     // called when submit button is pressed, checks to make sure seller info and image is complete
     @IBAction func submit(){
         if((prefs.objectForKey("BookSwapContactName")  == nil || prefs.objectForKey("BookSwapContactName")  as! String == "" ) && (prefs.objectForKey("BookSwapContactEmail")  == nil || prefs.objectForKey("BookSwapContactEmail") as! String == "" ||
-            prefs.objectForKey("BookSwapContactPhone") == nil || prefs.objectForKey("BookSwapContactPhone") as! String == "" ||
-            meetLatitude == nil
-            )){
+            prefs.objectForKey("BookSwapContactPhone") == nil || prefs.objectForKey("BookSwapContactPhone") as! String == "")
+            || meetLatitude == nil){
             let alertString = "Please provide a location, your name and a way to contact you!"
             let alert = UIAlertController(title: "Incomplete", message: alertString, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.Default, handler: nil))
