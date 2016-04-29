@@ -7,10 +7,8 @@
 //
 
 import UIKit
-import MapKit
-import CoreLocation
 
-class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, CLLocationManagerDelegate, MKMapViewDelegate {
+class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     @IBOutlet weak var currentImage: UIImageView!
     weak var finalImage:UIImage?
@@ -18,7 +16,6 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     let imagePicker = UIImagePickerController()
     let rdsEndPoint = "http://ec2-52-91-193-208.compute-1.amazonaws.com/textbooks"
     let pickerData = ["New","Excellent","Good", "Fair", "Poor"]
-    var locationManager:CLLocationManager!
     
     @IBOutlet weak var TitleField: UITextField!
     @IBOutlet weak var EditionField: UITextField!
@@ -27,10 +24,7 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var PriceField: UITextField!
     @IBOutlet weak var SubjectField: UITextField!
     @IBOutlet weak var DescriptionField: UITextField!
-    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var submitButton: UIButton!
-    var currentLocation:CLLocation!
-    var annotation = MKPointAnnotation()
     
     let prefs = NSUserDefaults.standardUserDefaults()
     var textbookArray = [Textbook]()
@@ -56,78 +50,12 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         self.AuthorField.delegate = self
         self.ISBNField.delegate = self
         self.PriceField.delegate = self
-        self.EditionField.delegate = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SellInfoViewController.fieldsFull(_:)), name: UITextFieldTextDidChangeNotification, object: nil)
         
         let decodeData = prefs.objectForKey("TheData") as! NSData
         textbookArray = NSKeyedUnarchiver.unarchiveObjectWithData(decodeData) as! [Textbook]
-        //CLLocationManager.location.coordinate
-//        if (CLLocationManager.locationServicesEnabled())
-//        {
-//            locationManager = CLLocationManager()
-//            locationManager.delegate = self
-//            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//            locationManager.requestAlwaysAuthorization()
-//            locationManager.startUpdatingLocation()
-//            print("Location enabled")
-//            //centerMapOnLocation(locationManager.location!)
-//        }
-        self.mapView.delegate = self
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
-        locationManager.startUpdatingLocation()
-//        let latitude = locationManager.location!.coordinate.latitude
-//        let longitude = locationManager.location!.coordinate.longitude
-//        let latitude = currentLocation.coordinate.latitude
-//        let longitude = currentLocation.coordinate.longitude
-//        let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
-//        centerMapOnLocation(initialLocation)
-//        annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-//        annotation.title = "Book Swap"
-//        annotation.subtitle = "Meet to sell your book!"
-//        mapView.addAnnotation(annotation)
-        print(mapView.center)
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        /* Are location services available on this device? */
-        if CLLocationManager.locationServicesEnabled(){
-            
-            /* Do we have authorization to access location services? */
-            switch CLLocationManager.authorizationStatus(){
-            case .AuthorizedAlways:
-                /* Yes, always */
-                createLocationManager(startImmediately: true)
-            case .AuthorizedWhenInUse:
-                /* Yes, only when our app is in use */
-                createLocationManager(startImmediately: true)
-            case .Denied:
-                /* No */
-                displayAlertWithTitle("Not Determined",
-                                      message: "Location services are not allowed for this app")
-            case .NotDetermined:
-                /* We don't know yet, we have to ask */
-                createLocationManager(startImmediately: false)
-                if let manager = self.locationManager{
-                    manager.requestWhenInUseAuthorization()
-                }
-            case .Restricted:
-                /* Restrictions have been applied, we have no access
-                 to location services */
-                displayAlertWithTitle("Restricted",
-                                      message: "Location services are not allowed for this app")
-            }
-            
-            
-        } else {
-            /* Location services are not enabled.
-             Take appropriate action: for instance, prompt the
-             user to enable the location services */
-            print("Location services are not enabled")
-        }
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -235,10 +163,6 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         case PriceField:
             return isNumeric(prospectiveText) && doesNotContainCharactersIn(prospectiveText, matchCharacters: "-e") &&
                 prospectiveText.characters.count <= 10
-            
-        case EditionField:
-            return containsOnlyCharactersIn(prospectiveText, matchCharacters: "0123456789") &&
-                prospectiveText.characters.count <= 3
 
         default:
             return true
@@ -261,114 +185,6 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         scanner.locale = NSLocale.currentLocale()
         return scanner.scanDecimal(nil) && scanner.atEnd
     }
-    
-    // MARK: MKMapViewDelegate Methods
-    let regionRadius: CLLocationDistance = 1000
-    func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-                                                                  regionRadius * 2.0, regionRadius * 2.0)
-        mapView.setRegion(coordinateRegion, animated: true)
-        print("Region set")
-    }
-    
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        if let annotation = annotation as? MKAnnotation? {
-            let identifier = "pin"
-            var view: MKPinAnnotationView
-            if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
-                as? MKPinAnnotationView { // 2
-                dequeuedView.annotation = annotation
-                view = dequeuedView
-            } else {
-                // 3
-                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                view.canShowCallout = true
-                view.calloutOffset = CGPoint(x: -5, y: 5)
-                view.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
-            }
-            return view
-        }
-        return nil
-    }
-    
-//    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
-//    {
-//        
-//        let location = locations.last! as CLLocation
-//        centerMapOnLocation(location)
-////        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-////        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-//        print(location)
-////        mapView.setRegion(region, animated: true)
-//    }
-    
-    func displayAlertWithTitle(title: String, message: String){
-        let controller = UIAlertController(title: title,
-                                           message: message,
-                                           preferredStyle: .Alert)
-        
-        controller.addAction(UIAlertAction(title: "OK",
-            style: .Default,
-            handler: nil))
-        
-        presentViewController(controller, animated: true, completion: nil)
-        
-    }
-    
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        if locations.count == 0{
-            //handle error here
-            return
-        }
-        
-        let newLocation = locations[0]
-        currentLocation = newLocation
-        //        print("Latitude = \(newLocation.coordinate.latitude)")
-        //        print("Longitude = \(newLocation.coordinate.longitude)")
-        //        lat.text = String(newLocation.coordinate.latitude)
-        //        long.text = String(newLocation.coordinate.longitude)
-        //lat.text = String(GPSY)
-        //long.text = String(GPSX)
-        
-    }
-    
-    func locationManager(manager: CLLocationManager,
-                         didFailWithError error: NSError){
-        print("Location manager failed with error = \(error)")
-    }
-    
-    func locationManager(manager: CLLocationManager,
-                         didChangeAuthorizationStatus status: CLAuthorizationStatus){
-        
-        print("The authorization status of location services is changed to: ", terminator: "")
-        
-        switch CLLocationManager.authorizationStatus(){
-        case .AuthorizedAlways:
-            print("Authorized")
-        case .AuthorizedWhenInUse:
-            print("Authorized when in use")
-        case .Denied:
-            print("Denied")
-        case .NotDetermined:
-            print("Not determined")
-        case .Restricted:
-            print("Restricted")
-        }
-        
-    }
-    
-    func createLocationManager(startImmediately startImmediately: Bool){
-        locationManager = CLLocationManager()
-        if let manager = locationManager{
-            print("Successfully created the location manager")
-            manager.delegate = self
-            if startImmediately{
-                manager.startUpdatingLocation()
-            }
-        }
-    }
-    
     
     // MARK: UIImagePickerControllerDelegate Methods
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
