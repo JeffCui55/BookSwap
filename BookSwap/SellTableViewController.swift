@@ -241,26 +241,32 @@ class SellTableViewController: UITableViewController {
         }
     }
 
-
-    /*
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+        let sold = UITableViewRowAction(style: .Normal, title: "Mark as sold") { (action, indexPath) in
+            self.tableView.reloadData()
+        }
+        
+        sold.backgroundColor = UIColor.init(colorLiteralRed: 74/255, green: 229/255, blue: 58/255, alpha: 1)
+        
+        return [sold]
+    }
+    
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
-
-    /*
+    
     // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
+//    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//        if editingStyle == .Delete {
+//            // Delete the row from the data source
+//            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+//        } else if editingStyle == .Insert {
+//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+//        }    
+//    }
 
     /*
     // Override to support rearranging the table view.
@@ -277,14 +283,41 @@ class SellTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "SellDetail" {
+            if let destination = segue.destinationViewController as? BuyDetailedViewController {
+                //if let indexPath = collectionView!.indexPathForCell(sender as! BuyCollectionViewCell) {
+                if let indexPath = tableView!.indexPathForSelectedRow{
+                    //print(indexPath.row)
+                    
+                    // Create more variables in detailed view and update them here for proper display
+                    destination.titleName = textbookArray[indexPath.row - 1].title
+                    destination.authorName = textbookArray[indexPath.row - 1].author
+                    destination.ISBNName = textbookArray[indexPath.row - 1].ISBN
+                    destination.ContactName = textbookArray[indexPath.row - 1].vendorEmail
+                    destination.GPSY = textbookArray[indexPath.row - 1].GPSY
+                    destination.GPSX = textbookArray[indexPath.row - 1].GPSX
+                    destination.phoneNumName = textbookArray[indexPath.row - 1].vendorPhone
+                    destination.priceName = textbookArray[indexPath.row - 1].price
+                    destination.qualityName = textbookArray[indexPath.row - 1].condition
+                    destination.editionName = textbookArray[indexPath.row - 1].edition
+                    destination.subjectName = textbookArray[indexPath.row - 1].subject
+                    destination.descriptionName = textbookArray[indexPath.row - 1].itemDescription
+                    destination.dateName = textbookArray[indexPath.row - 1].date
+                    destination.personName = textbookArray[indexPath.row - 1].vendorName
+                    let base64String = textbookArray[indexPath.row - 1].imageSource
+                    let fixedEncoding = base64String.stringByReplacingOccurrencesOfString(" ", withString: "+")
+                    let decodedData = NSData(base64EncodedString: fixedEncoding, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
+                    let decodedimage = UIImage(data: decodedData!)
+                    destination.theImagevar = decodedimage
+                }
+            }
+        }
+
     }
-    */
+ 
 
 }

@@ -253,6 +253,7 @@
                                 <connections>
                                     <outlet property="bookPrice" destination="1LL-Qs-Rm3" id="0gC-6L-Lbk"/>
                                     <outlet property="bookTitle" destination="F8C-1L-u6T" id="IUL-bq-cSA"/>
+                                    <segue destination="fcS-zC-5vL" kind="show" identifier="SellDetail" id="sF0-Qr-ZZ8"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1154,5 +1155,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="z8A-Qn-Eft"/>
+        <segue reference="sF0-Qr-ZZ8"/>
     </inferredMetricsTieBreakers>
 </document>
