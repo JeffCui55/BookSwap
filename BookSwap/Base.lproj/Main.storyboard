@@ -215,13 +215,16 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book Title 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F8C-1L-u6T">
-                                            <rect key="frame" x="20" y="11" width="186" height="21"/>
+                                            <rect key="frame" x="20" y="11" width="192" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="$20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1LL-Qs-Rm3">
-                                            <rect key="frame" x="256" y="11" width="31" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="$20" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1LL-Qs-Rm3">
+                                            <rect key="frame" x="227" y="11" width="60" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="60" id="LNG-an-UYu"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -229,17 +232,21 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="F8C-1L-u6T" firstAttribute="leading" secondItem="zgd-xH-gRl" secondAttribute="leadingMargin" constant="12" id="6tr-If-mHW"/>
+                                        <constraint firstItem="1LL-Qs-Rm3" firstAttribute="leading" secondItem="F8C-1L-u6T" secondAttribute="trailing" constant="15" id="E6o-a3-kKu"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="F8C-1L-u6T" secondAttribute="trailing" constant="250" id="Nd0-NM-Vx3"/>
                                         <constraint firstItem="1LL-Qs-Rm3" firstAttribute="leading" secondItem="F8C-1L-u6T" secondAttribute="trailing" constant="50" id="Tgo-tj-vNC"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="1LL-Qs-Rm3" secondAttribute="bottom" constant="3.5" id="avf-gU-47c"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="F8C-1L-u6T" secondAttribute="bottom" constant="3.5" id="bOa-r8-bNZ"/>
                                         <constraint firstItem="1LL-Qs-Rm3" firstAttribute="top" secondItem="zgd-xH-gRl" secondAttribute="topMargin" constant="3" id="j9d-c4-Xil"/>
                                         <constraint firstItem="F8C-1L-u6T" firstAttribute="top" secondItem="zgd-xH-gRl" secondAttribute="topMargin" constant="3" id="oEd-1v-wbh"/>
+                                        <constraint firstItem="1LL-Qs-Rm3" firstAttribute="leading" secondItem="F8C-1L-u6T" secondAttribute="trailing" constant="50" id="ooF-Y5-TWr"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="1LL-Qs-Rm3" secondAttribute="trailing" constant="25" id="qVh-KG-Ltm"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
                                             <exclude reference="Nd0-NM-Vx3"/>
+                                            <exclude reference="Tgo-tj-vNC"/>
+                                            <exclude reference="ooF-Y5-TWr"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -500,12 +507,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7WF-tJ-2kT">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="396"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="381"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pdz-my-9R5">
-                                <rect key="frame" x="0.0" y="396" width="320" height="40"/>
+                                <rect key="frame" x="0.0" y="381" width="320" height="55"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="ixl-lk-UiF"/>
+                                    <constraint firstAttribute="height" constant="55" id="ixl-lk-UiF"/>
                                 </constraints>
                                 <state key="normal" title="Set Location!"/>
                                 <connections>
@@ -1146,6 +1153,6 @@
         <image name="Shelf" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Iqx-sn-laQ"/>
+        <segue reference="z8A-Qn-Eft"/>
     </inferredMetricsTieBreakers>
 </document>
