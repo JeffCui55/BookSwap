@@ -11,7 +11,14 @@ import UIKit
 class SellTableViewController: UITableViewController {
     let prefs = NSUserDefaults.standardUserDefaults()
     var textbookArray = [Textbook]()
+    var customView: UIView!
+    var refreshImage:UIImageView!
+    var timer: NSTimer!
+    var isAnimating = false
+    let rdsEndPoint = "http://ec2-52-91-193-208.compute-1.amazonaws.com/textbooks"
+    let deviceID = UIDevice.currentDevice().identifierForVendor!.UUIDString
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
@@ -23,31 +30,189 @@ class SellTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        if((prefs.objectForKey("TheData")) == nil){
-            let data = NSKeyedArchiver.archivedDataWithRootObject(textbookArray)
-            prefs.setObject(data, forKey: "TheData")
-            prefs.synchronize()
-        }
-        else{
-            let decodeData = prefs.objectForKey("TheData") as! NSData
-            textbookArray = NSKeyedUnarchiver.unarchiveObjectWithData(decodeData) as! [Textbook]
-        }
+//        if((prefs.objectForKey("TheData")) == nil){
+//            let data = NSKeyedArchiver.archivedDataWithRootObject(textbookArray)
+//            prefs.setObject(data, forKey: "TheData")
+//            prefs.synchronize()
+//        }
+//        else{
+//            let decodeData = prefs.objectForKey("TheData") as! NSData
+//            textbookArray = NSKeyedUnarchiver.unarchiveObjectWithData(decodeData) as! [Textbook]
+//        }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadList:",name:"load", object: nil)
+        getSellerData(deviceID){success in
+            dispatch_sync(dispatch_get_main_queue()) {
+                self.textbookArray = success
+                self.tableView.reloadData()
+            }
+        }
 
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SellTableViewController.refresh(_:)),name:"loadSell", object: nil)
+        
+        //refresh control things
+        refreshControl = UIRefreshControl()
+        self.refreshControl!.addTarget(self, action: #selector(SellTableViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl!.backgroundColor = UIColor.clearColor()
+        refreshControl!.tintColor = UIColor.clearColor()
+        self.tableView!.addSubview(self.refreshControl!)
+        loadCustomRefreshContents()
+    }
+
+    func loadCustomRefreshContents() {
+        let refreshContents = NSBundle.mainBundle().loadNibNamed("Reload", owner: self, options: nil)
+        customView = refreshContents[0] as! UIView
+        refreshImage = (customView.viewWithTag(5) as! UIImageView)
+        customView.frame = refreshControl!.bounds
+        customView.clipsToBounds = true;
+        refreshControl!.addSubview(customView)
+        
+    }
+    
+    func startTimer() {
+        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(BuyCollectionViewController.endRefresh), userInfo: nil, repeats: true)
+    }
+    
+    func endRefresh() {
+        self.refreshControl!.endRefreshing()
+        
+        self.refreshImage.transform = CGAffineTransformIdentity
+        timer.invalidate()
+        timer = nil
+        isAnimating = false
+    }
+    
+    func refresh(sender:AnyObject)
+    {
+        print("in refresh")
+        if refreshControl!.refreshing {
+            if !isAnimating {
+                startTimer()
+                animate1()
+                getSellerData(deviceID){success in
+                    dispatch_sync(dispatch_get_main_queue()) {
+                        self.textbookArray = success
+                        self.tableView.reloadData()
+                    }
+                }
+
+            }
+        }
+        self.tableView.reloadData()
+        //print(textbookArray.count)
+    }
+    
+    func animate1() {
+        isAnimating = true
+        
+        UIView.animateWithDuration(0.5, delay: 0.1, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+            self.refreshImage?.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+            
+            }, completion: { (finished) -> Void in
+                if self.refreshControl!.refreshing{
+                    self.animate2()
+                }
+        })
+    }
+    
+    func animate2() {
+        
+        UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+            self.refreshImage?.transform = CGAffineTransformMakeRotation(CGFloat(M_PI*2))
+            
+            }, completion: { (finished) -> Void in
+                if self.refreshControl!.refreshing{
+                    self.animate1()
+                }
+        })
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    func loadList(notification: NSNotification){
-        //load data here
-        print("inside loadlist")
-        self.tableView.reloadData()
-    }
     
+    func getSellerData(deviceID: String, completion:(success:[Textbook]) -> Void){
+        print("in getSellerData")
+        let urlString:String = self.rdsEndPoint + "/sell"
+        
+        let request = NSMutableURLRequest(URL: (NSURL(string: urlString))!)
+        request.HTTPMethod = "POST"
+        
+        
+        let requestString: String = "deviceid=\(deviceID)"
+        
+        // Create Data from request
+        let requestData: NSData = NSData(bytes: String(requestString.utf8), length: requestString.characters.count)
+        // Set content-type
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "content-type")
+        request.HTTPBody = requestData
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+            guard error == nil && data != nil else {                                                          // check for fundamental networking error
+                print("error=\(error)")
+                return
+            }
+            
+            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                //print("response = \(response)")
+            }
+            
+            var list:[Textbook]? = []
+
+            do {
+                guard let dat = data else { throw JSONError.NoData }
+                
+                let json = try NSJSONSerialization.JSONObjectWithData(dat, options: NSJSONReadingOptions())
+                //                    as? NSDictionary else { throw JSONError.ConversionFailed }
+                let jsonL = json.count as Int
+                for i in 0..<jsonL {
+                    let tempBook = (json as! NSArray)[i]
+                    let newBook = Textbook()
+                    newBook.condition = tempBook["Condition"] as! String
+                    
+                    let dateFormatter = NSDateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+                    let datestr = (tempBook["DatePosted"] as! String)
+                    let fixeddatestr = datestr.stringByReplacingOccurrencesOfString(" 0000", withString: "+0000")
+                    newBook.date = dateFormatter.dateFromString(fixeddatestr)
+                    
+                    newBook.itemDescription = tempBook["Description"] as! String
+                    newBook.edition = tempBook["Edition"] as! String
+                    newBook.vendorEmail = tempBook["Email"] as! String
+                    // Will need to do GPS X and Y coordinates
+                    newBook.GPSX = Double(tempBook["GPSX"] as! NSNumber)
+                    newBook.GPSY = Double(tempBook["GPSY"] as! NSNumber)
+                    newBook.index = tempBook["ID"] as! Int
+                    newBook.ISBN = tempBook["ISBN"] as! String
+                    newBook.imageSource = tempBook["Image"] as? String
+                    //newBook.imageSource = "No Image Selected"
+                    newBook.vendorPhone = tempBook["Phone"] as! String
+                    newBook.subject = tempBook["Subject"] as! String
+                    newBook.title = tempBook["Title"] as! String
+                    newBook.author = tempBook["Author"] as! String
+                    newBook.vendorType = tempBook["TypeOfPerson"] as! String
+                    newBook.price = Double(tempBook["Price"] as! NSNumber)
+                    newBook.sellStatus = Int(tempBook["Status"] as! NSNumber)
+                    newBook.vendorName = tempBook["Name"] as! String
+                    newBook.vendorDeviceID = tempBook["DeviceID"] as! String
+                    list?.append(newBook)
+//                    print(list?.count)
+                }
+            } catch let error as JSONError {
+                print(error.rawValue)
+            } catch {
+                print(error)
+            }
+            completion(success: list!)
+        }
+        task.resume()
+    }
+    enum JSONError: String, ErrorType {
+        case NoData = "ERROR: no data"
+        case ConversionFailed = "ERROR: conversion from JSON failed"
+    }
     
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -69,8 +234,8 @@ class SellTableViewController: UITableViewController {
         }else{
             var currentRow = indexPath.row - 1
             let cell = tableView.dequeueReusableCellWithIdentifier("ItemSold", forIndexPath: indexPath) as! SellTableViewCell
-            
-            
+            cell.bookTitle.text = textbookArray[currentRow].title
+            cell.bookPrice.text = String(textbookArray[currentRow].price)
             
             return cell
         }

@@ -253,15 +253,22 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
             if(finalImage != nil){
                 postData(finalImage!) { (Status) -> Void in
                     print("WE DONe IN EHRE")
-                    print(Status)
+//                    print(Status)
                     if Status == true {
-                        self.grabSellerData()
+                        //NSNotificationCenter.defaultCenter().postNotificationName("load", object: nil)
                     }
                     //self.navigationController?.popToRootViewControllerAnimated(true)
                 }
-                //self.navigationController?.popToRootViewControllerAnimated(true)
+                let seconds = 2.0
+                let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per seconds
+                let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                
+                dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+                    NSNotificationCenter.defaultCenter().postNotificationName("loadSell", object: nil)
+                })
+                
+                self.navigationController?.popToRootViewControllerAnimated(true)
                 print("WE DONE OUT HERE")
-                //self.grabSellerData()
 
             }else{
                 let alertString = "Please provide an image of your textbook!"
@@ -338,59 +345,6 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
             self.presentViewController(alert, animated: true, completion: nil)
 //            completion(error:NSError(domain:"ImageData", code: 477, userInfo: nil));
         }
-    }
-    
-    func grabSellerData(){
-        print("in grabSellerData")
-        let deviceID = UIDevice.currentDevice().identifierForVendor!.UUIDString
-        getSellerData(deviceID){success in
-            dispatch_sync(dispatch_get_main_queue()) {
-                self.textbookArray = success
-                let data = NSKeyedArchiver.archivedDataWithRootObject(self.textbookArray)
-                self.prefs.setObject(data, forKey: "TheData")
-                self.prefs.synchronize()
-                NSNotificationCenter.defaultCenter().postNotificationName("load", object: nil)
-                //self.navigationController?.popToRootViewControllerAnimated(true)
-
-            }
-        }
-        self.navigationController?.popToRootViewControllerAnimated(true)
-    }
-    
-    func getSellerData(deviceID: String, completion:(success:[Textbook]) -> Void){
-        print("in getSellerData")
-        let urlString:String = self.rdsEndPoint + "/sell"
-        
-        let request = NSMutableURLRequest(URL: (NSURL(string: urlString))!)
-        request.HTTPMethod = "POST"
-        
-        
-        let requestString: String = "deviceid=\(deviceID)"
-        
-        // Create Data from request
-        let requestData: NSData = NSData(bytes: String(requestString.utf8), length: requestString.characters.count)
-        // Set content-type
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "content-type")
-        request.HTTPBody = requestData
-        
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
-            guard error == nil && data != nil else {                                                          // check for fundamental networking error
-                print("error=\(error)")
-                return
-            }
-            //print(response)
-            
-            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                //print("response = \(response)")
-            }
-            
-            let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            print("responseString = \(responseString)")
-        }
-        task.resume()
-    
-
     }
 
     func dismissKeyboard() {
