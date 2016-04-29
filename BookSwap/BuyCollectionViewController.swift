@@ -253,11 +253,21 @@ class BuyCollectionViewController: UICollectionViewController {
 //            let cellHeight = (decodedimage?.size.height)! * 0.05
 //            cell.frame = CGRectMake(cell.frame.origin.x, pOriginY + pCellHeight, cellDimension, cellHeight)
 //        }else{
-            let totalWidth = self.collectionView!.frame.size.width
-            let cellDimension = (totalWidth - 16.0 - 10.0) / 2.0
+        
+        let currentDevice: UIDevice = UIDevice.currentDevice()
+        let orientation: UIDeviceOrientation = currentDevice.orientation
+        if orientation.isLandscape {
+            let totalWidth = self.collectionView!.frame.size.height
+            let cellDimension = (totalWidth - 23.0) / 2.0
             //let cellHeight = (decodedimage?.size.height)! * 0.05
             cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cellDimension, cellDimension)
-
+        } else {
+            let totalWidth = self.collectionView!.frame.size.width
+            let cellDimension = (totalWidth - 26.0) / 2.0
+            //let cellHeight = (decodedimage?.size.height)! * 0.05
+            cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cellDimension, cellDimension)
+        }
+        
 //        }
         cell.layer.cornerRadius = 10
         cell.layer.masksToBounds = true
