@@ -54,7 +54,16 @@ class ChooseLocationViewController: UIViewController, CLLocationManagerDelegate,
     }
     
     @IBAction func setLocation(sender: AnyObject) {
-        delegate?.setMeetLocation(latitude, longitude: longitude)
+        if(latitude == nil || longitude == nil){
+            let alertString = "Please set a location!"
+            let alert = UIAlertController(title: "Incomplete", message: alertString, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+
+        }else{
+            delegate?.setMeetLocation(latitude, longitude: longitude)
+            self.navigationController?.popViewControllerAnimated(true)
+        }
     }
     
     

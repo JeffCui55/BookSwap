@@ -229,7 +229,7 @@ class BuyCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BuyCell", forIndexPath: indexPath) as! BuyCollectionViewCell
         
         cell.itemTitle.text = textbookList![indexPath.row].title
-        cell.itemPrice.text = String(textbookList![indexPath.row].price)
+        cell.itemPrice.text = "$"+String(Int(textbookList![indexPath.row].price))
         cell.textBackground.backgroundColor = UIColor.init(colorLiteralRed: (131/255), green: (169/255), blue: (255/255), alpha: 1)
         self.collectionView?.sendSubviewToBack(cell.textBackground)
         cell.itemPrice.layer.zPosition = 1

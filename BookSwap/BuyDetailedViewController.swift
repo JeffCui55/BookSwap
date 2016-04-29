@@ -75,7 +75,7 @@ class BuyDetailedViewController: UIViewController, CLLocationManagerDelegate, MK
         ISBNText.text = ISBNName
         ContactText.text = ContactName
         phoneText.text = phoneNumName
-        priceText.text = String(priceName)
+        priceText.text = "$"+String(Int(priceName))
         qualityText.text = qualityName
         editionText.text = editionName
         subjectText.text = subjectName

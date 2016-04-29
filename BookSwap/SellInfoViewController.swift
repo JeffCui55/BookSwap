@@ -26,8 +26,8 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var DescriptionField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     
-    var meetLatitude:Double?
-    var meetLongitute:Double?
+    var meetLatitude:Float?
+    var meetLongitude:Float?
     
     let prefs = NSUserDefaults.standardUserDefaults()
     var textbookArray = [Textbook]()
@@ -59,6 +59,8 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         let decodeData = prefs.objectForKey("TheData") as! NSData
         textbookArray = NSKeyedUnarchiver.unarchiveObjectWithData(decodeData) as! [Textbook]
 
+        print(meetLongitude)
+        print(meetLatitude)
     }
     
     override func didReceiveMemoryWarning() {
@@ -247,16 +249,17 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     // called when submit button is pressed, checks to make sure seller info and image is complete
     @IBAction func submit(){
         if((prefs.objectForKey("BookSwapContactName")  == nil || prefs.objectForKey("BookSwapContactName")  as! String == "" ) && (prefs.objectForKey("BookSwapContactEmail")  == nil || prefs.objectForKey("BookSwapContactEmail") as! String == "" ||
-            prefs.objectForKey("BookSwapContactPhone") == nil || prefs.objectForKey("BookSwapContactPhone") as! String == "" //||
-           // finalImage == nil || CGSizeEqualToSize(finalImage!.size, CGSizeZero)
+            prefs.objectForKey("BookSwapContactPhone") == nil || prefs.objectForKey("BookSwapContactPhone") as! String == "" ||
+            meetLatitude == nil
             )){
-            let alertString = "Please provide an image of your textbook, your name and a way to contact you!"
+            let alertString = "Please provide a location, your name and a way to contact you!"
             let alert = UIAlertController(title: "Incomplete", message: alertString, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
         else {
             if(finalImage != nil){
+                print(meetLatitude)
                 postData(finalImage!) { (Status) -> Void in
                     print("WE DONe IN EHRE")
 //                    print(Status)
@@ -311,14 +314,16 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
             let Name = prefs.objectForKey("BookSwapContactName") as! String
             let Top = "Student"
             let SellerID = UIDevice.currentDevice().identifierForVendor!.UUIDString
-
+            let latitude = meetLatitude!
+            let longitude = meetLongitude!
+            
             let urlString:String = self.rdsEndPoint
             
             let request = NSMutableURLRequest(URL: (NSURL(string: urlString))!)
             request.HTTPMethod = "POST"
             
 
-            let requestString: String = "isbn=\(ISBN)&title=\(Title)&author=\(Author)&edition=\(Edition)&dateposted=\(DatePosted)&condition=\(Condition)&price=\(Price)&gpsx=-157.824&gpsy=21.28&image=\(Image)&subject=\(Subject)&description=\(Description)&phone=\(Phone)&email=\(Email)&top=\(Top)&status=0&name=\(Name)&deviceid=\(SellerID)"
+            let requestString: String = "isbn=\(ISBN)&title=\(Title)&author=\(Author)&edition=\(Edition)&dateposted=\(DatePosted)&condition=\(Condition)&price=\(Price)&gpsx=\(longitude)&gpsy=\(latitude)&image=\(Image)&subject=\(Subject)&description=\(Description)&phone=\(Phone)&email=\(Email)&top=\(Top)&status=0&name=\(Name)&deviceid=\(SellerID)"
             
             // Create Data from request
             let requestData: NSData = NSData(bytes: String(requestString.utf8), length: requestString.characters.count)
@@ -338,8 +343,8 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
                     //print("response = \(response)")
                 }
                 
-                //let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-                //print("responseString = \(responseString)")
+//                let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+//                print("responseString = \(responseString)")
             }
             completion(Status: true)
             task.resume()
@@ -359,8 +364,8 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func setMeetLocation(latitude: Double, longitude: Double){
-        meetLatitude = latitude
-        meetLongitute = longitude
+        meetLatitude = Float(latitude)
+        meetLongitude = Float(longitude)
     }
     
     // MARK: - Navigation

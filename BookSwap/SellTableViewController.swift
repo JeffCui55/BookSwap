@@ -235,7 +235,7 @@ class SellTableViewController: UITableViewController {
             var currentRow = indexPath.row - 1
             let cell = tableView.dequeueReusableCellWithIdentifier("ItemSold", forIndexPath: indexPath) as! SellTableViewCell
             cell.bookTitle.text = textbookArray[currentRow].title
-            cell.bookPrice.text = String(textbookArray[currentRow].price)
+            cell.bookPrice.text = "$"+String(Int(textbookArray[currentRow].price))
             
             return cell
         }
