@@ -19,7 +19,6 @@ class BuyCollectionViewController: UICollectionViewController {
     var refreshImage:UIImageView!
     var timer: NSTimer!
     var isAnimating = false
-    var currentColorIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +56,6 @@ class BuyCollectionViewController: UICollectionViewController {
         self.collectionView!.addSubview(self.refreshControl)
         loadCustomRefreshContents()
         
-        print(UIDevice.currentDevice().identifierForVendor!.UUIDString)
 
     }
     
@@ -102,19 +100,6 @@ class BuyCollectionViewController: UICollectionViewController {
                 self.collectionView?.reloadData()
             }
         }
-    }
-    
-    func getNextColor() -> UIColor {
-        var colorsArray: Array<UIColor> = [UIColor.magentaColor(), UIColor.yellowColor(), UIColor.greenColor(), UIColor.blueColor(), UIColor.orangeColor()]
-        
-        if currentColorIndex == colorsArray.count {
-            currentColorIndex = 0
-        }
-        
-        let returnColor = colorsArray[currentColorIndex]
-        currentColorIndex += 1
-        
-        return returnColor
     }
     
     func animate1() {
@@ -185,7 +170,7 @@ class BuyCollectionViewController: UICollectionViewController {
                     newBook.vendorName = tempBook["Name"] as! String
                     newBook.vendorDeviceID = tempBook["DeviceID"] as! String
                     list?.append(newBook)
-                    print(list?.count)
+                    //print(list?.count)
                 }
             } catch let error as JSONError {
                 print(error.rawValue)
@@ -289,7 +274,7 @@ class BuyCollectionViewController: UICollectionViewController {
             if let destination = segue.destinationViewController as? BuyDetailedViewController {
                 //if let indexPath = collectionView!.indexPathForCell(sender as! BuyCollectionViewCell) {
                 if let indexPath = collectionView!.indexPathForItemAtPoint(point){
-                    print(indexPath.row)
+                    //print(indexPath.row)
                     
                     // Create more variables in detailed view and update them here for proper display
                     destination.titleName = textbookList![indexPath.row].title

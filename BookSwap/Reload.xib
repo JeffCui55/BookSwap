@@ -28,6 +28,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Loading" width="319" height="320"/>
+        <image name="Loading" width="320" height="319"/>
     </resources>
 </document>
