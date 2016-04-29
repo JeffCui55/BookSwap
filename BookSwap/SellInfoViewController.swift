@@ -30,7 +30,7 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     var meetLongitude:Float?
     
     let prefs = NSUserDefaults.standardUserDefaults()
-    var textbookArray = [Textbook]()
+//    var textbookArray = [Textbook]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,8 +56,8 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         self.EditionField.delegate = self
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SellInfoViewController.fieldsFull(_:)), name: UITextFieldTextDidChangeNotification, object: nil)
         
-        let decodeData = prefs.objectForKey("TheData") as! NSData
-        textbookArray = NSKeyedUnarchiver.unarchiveObjectWithData(decodeData) as! [Textbook]
+//        let decodeData = prefs.objectForKey("TheData") as! NSData
+//        textbookArray = NSKeyedUnarchiver.unarchiveObjectWithData(decodeData) as! [Textbook]
 
         print(meetLongitude)
         print(meetLatitude)
