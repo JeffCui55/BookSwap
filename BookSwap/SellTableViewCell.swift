@@ -12,6 +12,7 @@ class SellTableViewCell: UITableViewCell {
 
     @IBOutlet weak var bookTitle: UILabel!
     @IBOutlet weak var bookPrice: UILabel!
+    @IBOutlet weak var checkImage:UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

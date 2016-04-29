@@ -209,10 +209,63 @@ class SellTableViewController: UITableViewController {
         }
         task.resume()
     }
+    
     enum JSONError: String, ErrorType {
         case NoData = "ERROR: no data"
         case ConversionFailed = "ERROR: conversion from JSON failed"
     }
+    
+    func callupdate(bookID: Int){
+        print("here")
+        self.update(bookID){Status in
+            dispatch_async(dispatch_get_main_queue()) {
+                self.getSellerData(self.deviceID){success in
+                    dispatch_sync(dispatch_get_main_queue()) {
+                        self.textbookArray = success
+                        self.tableView.reloadData()
+                    }
+                }
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func update(bookID: Int, completion: (Status: Bool) -> Void){
+            print("here")
+            let urlString:String = self.rdsEndPoint + "/update/"
+            
+            let request = NSMutableURLRequest(URL: (NSURL(string: urlString))!)
+            request.HTTPMethod = "POST"
+            
+            
+            let requestString: String = "id=\(bookID)"
+
+            // Create Data from request
+            let requestData: NSData = NSData(bytes: String(requestString.utf8), length: requestString.characters.count)
+            // Set content-type
+            request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "content-type")
+            request.HTTPBody = requestData
+
+            let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+                guard error == nil && data != nil else {                                                          // check for fundamental networking error
+                    print("error=\(error)")
+                    return
+                }
+                //print(response)
+                
+                if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
+                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                    //print("response = \(response)")
+                }
+                
+//                let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+//                print("responseString = \(responseString)")
+            }
+            completion(Status: true)
+            task.resume()
+    }
+
+
     
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -237,14 +290,21 @@ class SellTableViewController: UITableViewController {
             cell.bookTitle.text = textbookArray[currentRow].title
             cell.bookPrice.text = "$"+String(Int(textbookArray[currentRow].price))
             
+            if(textbookArray[currentRow].sellStatus == 1){
+                cell.checkImage.image = UIImage(named: "Check")
+            }
+            
             return cell
         }
     }
 
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
+        print("here1")
         let sold = UITableViewRowAction(style: .Normal, title: "Mark as sold") { (action, indexPath) in
+            let bookID = self.textbookArray[indexPath.row - 1].index
             self.tableView.reloadData()
+            self.callupdate(bookID)
         }
         
         sold.backgroundColor = UIColor.init(colorLiteralRed: 74/255, green: 229/255, blue: 58/255, alpha: 1)
@@ -255,11 +315,20 @@ class SellTableViewController: UITableViewController {
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return true
+        if(indexPath.row > 0){
+            let status = self.textbookArray[indexPath.row - 1].sellStatus
+            if(status == 0){
+                return true
+            }else{
+                return false
+            }
+        }
+        return false
     }
     
     // Override to support editing the table view.
 //    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//        print("here2")
 //        if editingStyle == .Delete {
 //            // Delete the row from the data source
 //            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)

@@ -215,7 +215,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book Title 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F8C-1L-u6T">
-                                            <rect key="frame" x="20" y="11" width="192" height="21"/>
+                                            <rect key="frame" x="32" y="11" width="180" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -229,21 +229,40 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9wl-20-SeF">
+                                            <rect key="frame" x="0.0" y="7" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="EK9-4f-3Qq"/>
+                                                <constraint firstAttribute="height" constant="30" id="LXE-j5-dFz"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="9wl-20-SeF" firstAttribute="top" secondItem="zgd-xH-gRl" secondAttribute="top" constant="4.25" id="4ys-EA-B3J"/>
                                         <constraint firstItem="F8C-1L-u6T" firstAttribute="leading" secondItem="zgd-xH-gRl" secondAttribute="leadingMargin" constant="12" id="6tr-If-mHW"/>
                                         <constraint firstItem="1LL-Qs-Rm3" firstAttribute="leading" secondItem="F8C-1L-u6T" secondAttribute="trailing" constant="15" id="E6o-a3-kKu"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="F8C-1L-u6T" secondAttribute="trailing" constant="250" id="Nd0-NM-Vx3"/>
+                                        <constraint firstItem="9wl-20-SeF" firstAttribute="top" secondItem="zgd-xH-gRl" secondAttribute="topMargin" constant="-4" id="NyM-4q-N2g"/>
                                         <constraint firstItem="1LL-Qs-Rm3" firstAttribute="leading" secondItem="F8C-1L-u6T" secondAttribute="trailing" constant="50" id="Tgo-tj-vNC"/>
+                                        <constraint firstItem="9wl-20-SeF" firstAttribute="leading" secondItem="zgd-xH-gRl" secondAttribute="leading" id="UOU-dV-lfd"/>
+                                        <constraint firstItem="9wl-20-SeF" firstAttribute="centerY" secondItem="zgd-xH-gRl" secondAttribute="centerY" id="WvI-N5-ijz"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="9wl-20-SeF" secondAttribute="bottom" constant="-3.5" id="ZK9-ei-dYf"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="1LL-Qs-Rm3" secondAttribute="bottom" constant="3.5" id="avf-gU-47c"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="F8C-1L-u6T" secondAttribute="bottom" constant="3.5" id="bOa-r8-bNZ"/>
+                                        <constraint firstAttribute="bottom" secondItem="9wl-20-SeF" secondAttribute="bottom" constant="4.25" id="bvS-uI-p66"/>
                                         <constraint firstItem="1LL-Qs-Rm3" firstAttribute="top" secondItem="zgd-xH-gRl" secondAttribute="topMargin" constant="3" id="j9d-c4-Xil"/>
                                         <constraint firstItem="F8C-1L-u6T" firstAttribute="top" secondItem="zgd-xH-gRl" secondAttribute="topMargin" constant="3" id="oEd-1v-wbh"/>
                                         <constraint firstItem="1LL-Qs-Rm3" firstAttribute="leading" secondItem="F8C-1L-u6T" secondAttribute="trailing" constant="50" id="ooF-Y5-TWr"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="1LL-Qs-Rm3" secondAttribute="trailing" constant="25" id="qVh-KG-Ltm"/>
+                                        <constraint firstItem="F8C-1L-u6T" firstAttribute="leading" secondItem="9wl-20-SeF" secondAttribute="trailing" constant="2" id="tQQ-Df-NO8"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
+                                            <exclude reference="4ys-EA-B3J"/>
+                                            <exclude reference="NyM-4q-N2g"/>
+                                            <exclude reference="ZK9-ei-dYf"/>
+                                            <exclude reference="bvS-uI-p66"/>
+                                            <exclude reference="6tr-If-mHW"/>
                                             <exclude reference="Nd0-NM-Vx3"/>
                                             <exclude reference="Tgo-tj-vNC"/>
                                             <exclude reference="ooF-Y5-TWr"/>
@@ -253,6 +272,7 @@
                                 <connections>
                                     <outlet property="bookPrice" destination="1LL-Qs-Rm3" id="0gC-6L-Lbk"/>
                                     <outlet property="bookTitle" destination="F8C-1L-u6T" id="IUL-bq-cSA"/>
+                                    <outlet property="checkImage" destination="9wl-20-SeF" id="Fhp-QS-Cer"/>
                                     <segue destination="fcS-zC-5vL" kind="show" identifier="SellDetail" id="sF0-Qr-ZZ8"/>
                                 </connections>
                             </tableViewCell>
@@ -288,7 +308,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jPe-Ip-6vo">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jPe-Ip-6vo">
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0pZ-NQ-ecF">
@@ -433,6 +453,7 @@
                                     <constraint firstItem="h0l-UP-bTz" firstAttribute="leading" secondItem="jPe-Ip-6vo" secondAttribute="leading" constant="10" id="UUn-PC-lLf"/>
                                     <constraint firstItem="POt-zZ-fYw" firstAttribute="top" secondItem="jPe-Ip-6vo" secondAttribute="top" constant="-20" id="Wy7-ME-5Ph"/>
                                     <constraint firstAttribute="trailing" secondItem="POt-zZ-fYw" secondAttribute="trailing" constant="10" id="cJY-7Y-GwA"/>
+                                    <constraint firstAttribute="bottom" secondItem="oKc-pD-srK" secondAttribute="bottom" constant="50" id="dKU-IV-3cg"/>
                                     <constraint firstItem="oKc-pD-srK" firstAttribute="leading" secondItem="jPe-Ip-6vo" secondAttribute="leading" constant="22" id="df5-Vr-4tM"/>
                                     <constraint firstItem="oKc-pD-srK" firstAttribute="top" secondItem="rga-Fe-aeu" secondAttribute="bottom" constant="28" id="ejZ-aX-wOg"/>
                                     <constraint firstItem="wf4-0h-6DX" firstAttribute="top" secondItem="h4V-of-rTh" secondAttribute="bottom" constant="12" id="gR8-3z-ygJ"/>
@@ -615,7 +636,6 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZC1-dL-prj">
                                         <rect key="frame" x="10" y="5" width="394" height="225"/>
-                                        <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="225" id="fIM-9L-jte"/>
                                             <constraint firstAttribute="width" constant="300" id="h1U-1r-QsA"/>
@@ -1175,8 +1195,7 @@
         <image name="Shelf" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="4LO-o3-CqV"/>
         <segue reference="z8A-Qn-Eft"/>
-        <segue reference="sF0-Qr-ZZ8"/>
-        <segue reference="Iqx-sn-laQ"/>
     </inferredMetricsTieBreakers>
 </document>
