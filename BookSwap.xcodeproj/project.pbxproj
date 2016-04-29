@@ -24,6 +24,7 @@
 		5246AAAF1CB06461009A5623 /* SellInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246AAAE1CB06461009A5623 /* SellInfoViewController.swift */; };
 		5246AAB11CB06477009A5623 /* SellSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246AAB01CB06477009A5623 /* SellSignInViewController.swift */; };
 		5246AAB31CB065EC009A5623 /* Textbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246AAB21CB065EC009A5623 /* Textbook.swift */; };
+		527087B51CD2E7EB007FE332 /* ChooseLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527087B41CD2E7EB007FE332 /* ChooseLocationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		5246AAAE1CB06461009A5623 /* SellInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellInfoViewController.swift; sourceTree = "<group>"; };
 		5246AAB01CB06477009A5623 /* SellSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellSignInViewController.swift; sourceTree = "<group>"; };
 		5246AAB21CB065EC009A5623 /* Textbook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Textbook.swift; sourceTree = "<group>"; };
+		527087B41CD2E7EB007FE332 /* ChooseLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseLocationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				5246AAA61CB06329009A5623 /* SellTableViewCell.swift */,
 				5246AAAE1CB06461009A5623 /* SellInfoViewController.swift */,
 				5246AAB01CB06477009A5623 /* SellSignInViewController.swift */,
+				527087B41CD2E7EB007FE332 /* ChooseLocationViewController.swift */,
 			);
 			name = Sell;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 				5246AAA91CB0633A009A5623 /* BuyCollectionViewCell.swift in Sources */,
 				5246AAA31CB062C3009A5623 /* BuyCollectionViewController.swift in Sources */,
 				5246AAB11CB06477009A5623 /* SellSignInViewController.swift in Sources */,
+				527087B51CD2E7EB007FE332 /* ChooseLocationViewController.swift in Sources */,
 				5246AAA71CB06329009A5623 /* SellTableViewCell.swift in Sources */,
 				5246AAB31CB065EC009A5623 /* Textbook.swift in Sources */,
 				1FFD35E11CAC9CB90067C78E /* AppDelegate.swift in Sources */,

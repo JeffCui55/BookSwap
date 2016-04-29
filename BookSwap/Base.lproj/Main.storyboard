@@ -467,6 +467,62 @@
             </objects>
             <point key="canvasLocation" x="-2284.5" y="1370.5"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="UKA-Ql-fkz">
+            <objects>
+                <viewController id="OrZ-WP-Sao" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bmy-UF-h2s"/>
+                        <viewControllerLayoutGuide type="bottom" id="ahx-eG-rMy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vNh-N9-Exj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pdz-my-9R5">
+                                <rect key="frame" x="0.0" y="440" width="320" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="ixl-lk-UiF"/>
+                                </constraints>
+                                <state key="normal" title="Set Location!"/>
+                            </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7WF-tJ-2kT">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="440"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7WF-tJ-2kT" firstAttribute="centerY" secondItem="vNh-N9-Exj" secondAttribute="centerY" id="6qH-7t-gfQ"/>
+                            <constraint firstItem="7WF-tJ-2kT" firstAttribute="top" secondItem="vNh-N9-Exj" secondAttribute="top" id="7WA-1u-HO9"/>
+                            <constraint firstItem="Pdz-my-9R5" firstAttribute="top" secondItem="7WF-tJ-2kT" secondAttribute="bottom" constant="40" id="7iL-bA-Xin"/>
+                            <constraint firstItem="Pdz-my-9R5" firstAttribute="leading" secondItem="vNh-N9-Exj" secondAttribute="leading" id="KW6-1r-M3v"/>
+                            <constraint firstItem="ahx-eG-rMy" firstAttribute="top" secondItem="Pdz-my-9R5" secondAttribute="bottom" id="O4D-Jc-7th"/>
+                            <constraint firstItem="Pdz-my-9R5" firstAttribute="top" secondItem="7WF-tJ-2kT" secondAttribute="bottom" id="OLD-AV-mYi"/>
+                            <constraint firstItem="7WF-tJ-2kT" firstAttribute="leading" secondItem="vNh-N9-Exj" secondAttribute="leading" id="P0Y-gd-Say"/>
+                            <constraint firstAttribute="trailing" secondItem="7WF-tJ-2kT" secondAttribute="trailing" id="TPB-d1-B96"/>
+                            <constraint firstAttribute="bottom" secondItem="Pdz-my-9R5" secondAttribute="bottom" id="pUx-uw-iqW"/>
+                            <constraint firstItem="ahx-eG-rMy" firstAttribute="top" secondItem="7WF-tJ-2kT" secondAttribute="bottom" id="qdK-oM-UOo"/>
+                            <constraint firstItem="Pdz-my-9R5" firstAttribute="top" secondItem="7WF-tJ-2kT" secondAttribute="bottom" id="s9i-SN-8q8"/>
+                            <constraint firstAttribute="trailing" secondItem="Pdz-my-9R5" secondAttribute="trailing" id="uRl-rn-5uD"/>
+                            <constraint firstItem="7WF-tJ-2kT" firstAttribute="centerX" secondItem="vNh-N9-Exj" secondAttribute="centerX" id="yU9-NO-oFM"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="6qH-7t-gfQ"/>
+                                <exclude reference="yU9-NO-oFM"/>
+                                <exclude reference="7iL-bA-Xin"/>
+                                <exclude reference="s9i-SN-8q8"/>
+                                <exclude reference="O4D-Jc-7th"/>
+                                <exclude reference="qdK-oM-UOo"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lkb-Fv-lOi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1807" y="1370"/>
+        </scene>
         <!--Buy Detailed View Controller-->
         <scene sceneID="ROR-bN-PKZ">
             <objects>
