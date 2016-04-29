@@ -169,7 +169,8 @@ class BuyCollectionViewController: UICollectionViewController {
                     newBook.sellStatus = Int(tempBook["Status"] as! NSNumber)
                     newBook.vendorName = tempBook["Name"] as! String
                     newBook.vendorDeviceID = tempBook["DeviceID"] as! String
-                    list?.append(newBook)
+                    //list?.append(newBook)
+                    list?.insert(newBook, atIndex: 0)
                     //print(list?.count)
                 }
             } catch let error as JSONError {
