@@ -378,7 +378,7 @@
                                         <rect key="frame" x="10" y="271" width="87" height="30"/>
                                         <state key="normal" title="+ Add a GPS"/>
                                         <connections>
-                                            <segue destination="OrZ-WP-Sao" kind="show" id="WIx-gr-0x8"/>
+                                            <segue destination="OrZ-WP-Sao" kind="show" identifier="" id="WIx-gr-0x8"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -491,16 +491,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7WF-tJ-2kT">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="396"/>
+                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pdz-my-9R5">
-                                <rect key="frame" x="0.0" y="440" width="320" height="40"/>
+                                <rect key="frame" x="0.0" y="396" width="320" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ixl-lk-UiF"/>
                                 </constraints>
                                 <state key="normal" title="Set Location!"/>
+                                <connections>
+                                    <action selector="setLocation:" destination="OrZ-WP-Sao" eventType="touchUpInside" id="QJp-CA-IpS"/>
+                                </connections>
                             </button>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7WF-tJ-2kT">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="440"/>
-                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -512,22 +515,30 @@
                             <constraint firstItem="ahx-eG-rMy" firstAttribute="top" secondItem="Pdz-my-9R5" secondAttribute="bottom" id="O4D-Jc-7th"/>
                             <constraint firstItem="Pdz-my-9R5" firstAttribute="top" secondItem="7WF-tJ-2kT" secondAttribute="bottom" id="OLD-AV-mYi"/>
                             <constraint firstItem="7WF-tJ-2kT" firstAttribute="leading" secondItem="vNh-N9-Exj" secondAttribute="leading" id="P0Y-gd-Say"/>
+                            <constraint firstAttribute="trailing" secondItem="Pdz-my-9R5" secondAttribute="trailing" id="R66-S4-VhQ"/>
                             <constraint firstAttribute="trailing" secondItem="7WF-tJ-2kT" secondAttribute="trailing" id="TPB-d1-B96"/>
+                            <constraint firstItem="ahx-eG-rMy" firstAttribute="top" secondItem="Pdz-my-9R5" secondAttribute="bottom" id="Uxz-e7-gjo"/>
                             <constraint firstAttribute="bottom" secondItem="Pdz-my-9R5" secondAttribute="bottom" id="pUx-uw-iqW"/>
                             <constraint firstItem="ahx-eG-rMy" firstAttribute="top" secondItem="7WF-tJ-2kT" secondAttribute="bottom" id="qdK-oM-UOo"/>
                             <constraint firstItem="Pdz-my-9R5" firstAttribute="top" secondItem="7WF-tJ-2kT" secondAttribute="bottom" id="s9i-SN-8q8"/>
                             <constraint firstAttribute="trailing" secondItem="Pdz-my-9R5" secondAttribute="trailing" id="uRl-rn-5uD"/>
+                            <constraint firstItem="Pdz-my-9R5" firstAttribute="top" secondItem="7WF-tJ-2kT" secondAttribute="bottom" id="wzx-kU-rym"/>
                             <constraint firstItem="7WF-tJ-2kT" firstAttribute="centerX" secondItem="vNh-N9-Exj" secondAttribute="centerX" id="yU9-NO-oFM"/>
+                            <constraint firstItem="Pdz-my-9R5" firstAttribute="leading" secondItem="vNh-N9-Exj" secondAttribute="leading" id="z5P-3G-yE5"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="6qH-7t-gfQ"/>
                                 <exclude reference="yU9-NO-oFM"/>
-                                <exclude reference="O4D-Jc-7th"/>
-                                <exclude reference="qdK-oM-UOo"/>
+                                <exclude reference="4iz-cC-uSU"/>
                                 <exclude reference="7iL-bA-Xin"/>
+                                <exclude reference="KW6-1r-M3v"/>
+                                <exclude reference="OLD-AV-mYi"/>
                                 <exclude reference="pUx-uw-iqW"/>
                                 <exclude reference="s9i-SN-8q8"/>
+                                <exclude reference="uRl-rn-5uD"/>
+                                <exclude reference="O4D-Jc-7th"/>
+                                <exclude reference="qdK-oM-UOo"/>
                             </mask>
                         </variation>
                     </view>
@@ -535,7 +546,6 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="7WF-tJ-2kT" id="TNn-fh-ICp"/>
-                        <outlet property="setLocation" destination="Pdz-my-9R5" id="JST-cl-FrN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lkb-Fv-lOi" userLabel="First Responder" sceneMemberID="firstResponder"/>

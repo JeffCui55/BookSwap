@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate,ChooseLocationViewControllerDelegate {
     
     @IBOutlet weak var currentImage: UIImageView!
     weak var finalImage:UIImage?
@@ -25,6 +25,9 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var SubjectField: UITextField!
     @IBOutlet weak var DescriptionField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
+    
+    var meetLatitude:Double?
+    var meetLongitute:Double?
     
     let prefs = NSUserDefaults.standardUserDefaults()
     var textbookArray = [Textbook]()
@@ -352,14 +355,19 @@ class SellInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         view.endEditing(true)
     }
     
-    /*
+    func setMeetLocation(latitude: Double, longitude: Double){
+        meetLatitude = latitude
+        meetLongitute = longitude
+    }
+    
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let destinationViewController = segue.destinationViewController as? ChooseLocationViewController {
+            destinationViewController.delegate = self
+        }
     }
-    */
+   
 
 }

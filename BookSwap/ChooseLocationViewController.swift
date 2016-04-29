@@ -10,10 +10,14 @@ import UIKit
 import MapKit
 import CoreLocation
 
+protocol ChooseLocationViewControllerDelegate {
+    func setMeetLocation(latitude: Double, longitude: Double)
+}
+
 class ChooseLocationViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var setLocation: UIButton!
     
+    var delegate: ChooseLocationViewControllerDelegate?
     var latitude: Double!
     var longitude: Double!
     
@@ -48,6 +52,11 @@ class ChooseLocationViewController: UIViewController, CLLocationManagerDelegate,
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func setLocation(sender: AnyObject) {
+        delegate?.setMeetLocation(latitude, longitude: longitude)
+    }
+    
     
     // Mark - MKMapViewDelegate methods
     
