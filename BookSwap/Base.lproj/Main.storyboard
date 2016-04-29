@@ -374,6 +374,13 @@
                                             <action selector="submit" destination="TEL-N2-RII" eventType="touchUpInside" id="kzA-jv-M5a"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rga-Fe-aeu">
+                                        <rect key="frame" x="10" y="271" width="87" height="30"/>
+                                        <state key="normal" title="+ Add a GPS"/>
+                                        <connections>
+                                            <segue destination="OrZ-WP-Sao" kind="show" id="WIx-gr-0x8"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="0pZ-NQ-ecF" firstAttribute="top" secondItem="jPe-Ip-6vo" secondAttribute="top" constant="-20" id="2V4-sP-Ieb"/>
@@ -391,21 +398,25 @@
                                     <constraint firstItem="bT9-aE-vlu" firstAttribute="leading" secondItem="h0l-UP-bTz" secondAttribute="trailing" constant="50" id="JIC-Gd-bDZ"/>
                                     <constraint firstItem="oKc-pD-srK" firstAttribute="leading" secondItem="jPe-Ip-6vo" secondAttribute="leading" constant="9" id="JjX-Wr-hyh"/>
                                     <constraint firstItem="bT9-aE-vlu" firstAttribute="top" secondItem="nyA-ct-6rx" secondAttribute="bottom" constant="12" id="KCf-qJ-mOj"/>
+                                    <constraint firstItem="rga-Fe-aeu" firstAttribute="leading" secondItem="jPe-Ip-6vo" secondAttribute="leading" constant="10" id="LPW-rv-ijM"/>
                                     <constraint firstItem="ubt-CB-lCO" firstAttribute="leading" secondItem="jPe-Ip-6vo" secondAttribute="leading" constant="10" id="Mnq-mI-404"/>
                                     <constraint firstItem="ubt-CB-lCO" firstAttribute="top" secondItem="fB8-I0-LsC" secondAttribute="bottom" constant="12" id="NAF-X0-sT1"/>
                                     <constraint firstItem="fB8-I0-LsC" firstAttribute="top" secondItem="Wqw-Au-NvG" secondAttribute="bottom" constant="12" id="OLn-cU-4Hp"/>
+                                    <constraint firstItem="bT9-aE-vlu" firstAttribute="leading" secondItem="rga-Fe-aeu" secondAttribute="trailing" constant="68" id="PBU-eA-icn"/>
                                     <constraint firstItem="Wqw-Au-NvG" firstAttribute="leading" secondItem="jPe-Ip-6vo" secondAttribute="leading" constant="10" id="Pb8-lW-xSY"/>
                                     <constraint firstItem="POt-zZ-fYw" firstAttribute="leading" secondItem="0pZ-NQ-ecF" secondAttribute="trailing" constant="23" id="QWl-WH-8sh"/>
                                     <constraint firstItem="h4V-of-rTh" firstAttribute="leading" secondItem="ubt-CB-lCO" secondAttribute="trailing" constant="8" id="S0k-Fz-RLu"/>
                                     <constraint firstItem="h0l-UP-bTz" firstAttribute="leading" secondItem="jPe-Ip-6vo" secondAttribute="leading" constant="10" id="UUn-PC-lLf"/>
                                     <constraint firstItem="POt-zZ-fYw" firstAttribute="top" secondItem="jPe-Ip-6vo" secondAttribute="top" constant="-20" id="Wy7-ME-5Ph"/>
                                     <constraint firstAttribute="trailing" secondItem="POt-zZ-fYw" secondAttribute="trailing" constant="10" id="cJY-7Y-GwA"/>
+                                    <constraint firstItem="oKc-pD-srK" firstAttribute="top" secondItem="rga-Fe-aeu" secondAttribute="bottom" constant="28" id="ejZ-aX-wOg"/>
                                     <constraint firstItem="wf4-0h-6DX" firstAttribute="top" secondItem="h4V-of-rTh" secondAttribute="bottom" constant="12" id="gR8-3z-ygJ"/>
                                     <constraint firstItem="czq-jR-Nla" firstAttribute="top" secondItem="jPe-Ip-6vo" secondAttribute="top" constant="-50" id="iO0-Ko-8aq"/>
                                     <constraint firstItem="h4V-of-rTh" firstAttribute="top" secondItem="fB8-I0-LsC" secondAttribute="bottom" constant="20" id="igA-bk-skf"/>
                                     <constraint firstAttribute="trailing" secondItem="nyA-ct-6rx" secondAttribute="trailing" constant="10" id="l3g-CY-N9p"/>
                                     <constraint firstItem="nyA-ct-6rx" firstAttribute="top" secondItem="wf4-0h-6DX" secondAttribute="bottom" constant="12" id="lBw-hd-ps6"/>
                                     <constraint firstItem="Wqw-Au-NvG" firstAttribute="top" secondItem="0pZ-NQ-ecF" secondAttribute="bottom" constant="12" id="sJP-xQ-FGH"/>
+                                    <constraint firstItem="rga-Fe-aeu" firstAttribute="top" secondItem="h0l-UP-bTz" secondAttribute="bottom" constant="8" id="v4B-D3-tV7"/>
                                     <constraint firstItem="oKc-pD-srK" firstAttribute="top" secondItem="h0l-UP-bTz" secondAttribute="bottom" constant="66" id="vQB-0P-78r"/>
                                     <constraint firstAttribute="trailing" secondItem="0pZ-NQ-ecF" secondAttribute="trailing" constant="120" id="vZX-UP-6id"/>
                                     <constraint firstAttribute="bottom" secondItem="0pZ-NQ-ecF" secondAttribute="bottom" constant="337" id="wX7-Cl-WnO"/>
@@ -420,6 +431,7 @@
                                         <exclude reference="igA-bk-skf"/>
                                         <exclude reference="Mnq-mI-404"/>
                                         <exclude reference="ywV-pH-zqV"/>
+                                        <exclude reference="vQB-0P-78r"/>
                                         <exclude reference="wiw-Sa-p8m"/>
                                     </mask>
                                 </variation>
@@ -467,10 +479,10 @@
             </objects>
             <point key="canvasLocation" x="-2284.5" y="1370.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Tap to set!-->
         <scene sceneID="UKA-Ql-fkz">
             <objects>
-                <viewController id="OrZ-WP-Sao" sceneMemberID="viewController">
+                <viewController id="OrZ-WP-Sao" customClass="ChooseLocationViewController" customModule="BookSwap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bmy-UF-h2s"/>
                         <viewControllerLayoutGuide type="bottom" id="ahx-eG-rMy"/>
@@ -492,6 +504,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Pdz-my-9R5" firstAttribute="bottom" secondItem="vNh-N9-Exj" secondAttribute="bottomMargin" id="4iz-cC-uSU"/>
                             <constraint firstItem="7WF-tJ-2kT" firstAttribute="centerY" secondItem="vNh-N9-Exj" secondAttribute="centerY" id="6qH-7t-gfQ"/>
                             <constraint firstItem="7WF-tJ-2kT" firstAttribute="top" secondItem="vNh-N9-Exj" secondAttribute="top" id="7WA-1u-HO9"/>
                             <constraint firstItem="Pdz-my-9R5" firstAttribute="top" secondItem="7WF-tJ-2kT" secondAttribute="bottom" constant="40" id="7iL-bA-Xin"/>
@@ -510,14 +523,20 @@
                             <mask key="constraints">
                                 <exclude reference="6qH-7t-gfQ"/>
                                 <exclude reference="yU9-NO-oFM"/>
-                                <exclude reference="7iL-bA-Xin"/>
-                                <exclude reference="s9i-SN-8q8"/>
                                 <exclude reference="O4D-Jc-7th"/>
                                 <exclude reference="qdK-oM-UOo"/>
+                                <exclude reference="7iL-bA-Xin"/>
+                                <exclude reference="pUx-uw-iqW"/>
+                                <exclude reference="s9i-SN-8q8"/>
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="Tap to set!" id="2w0-BN-ynF"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="mapView" destination="7WF-tJ-2kT" id="TNn-fh-ICp"/>
+                        <outlet property="setLocation" destination="Pdz-my-9R5" id="JST-cl-FrN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lkb-Fv-lOi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
