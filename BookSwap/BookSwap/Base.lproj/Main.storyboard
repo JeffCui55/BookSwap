@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fhW-Yh-lYP">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--My Books-->
+        <scene sceneID="huv-F2-xus">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="7SW-eP-d5i" customClass="MyBooksViewController" customModule="BookSwap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RY6-yH-5gi"/>
+                        <viewControllerLayoutGuide type="bottom" id="5c3-Y3-mKV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qQi-TS-g9F">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mpL-OQ-LbU">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyBookCell" rowHeight="80" id="U3D-zX-cts" customClass="MyBooksTableViewCell" customModule="BookSwap" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U3D-zX-cts" id="SJr-Qm-gFC">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mpL-OQ-LbU" firstAttribute="top" secondItem="RY6-yH-5gi" secondAttribute="bottom" id="BnK-yG-v8f"/>
+                            <constraint firstItem="mpL-OQ-LbU" firstAttribute="leading" secondItem="qQi-TS-g9F" secondAttribute="leading" id="TSu-OZ-RYG"/>
+                            <constraint firstAttribute="trailing" secondItem="mpL-OQ-LbU" secondAttribute="trailing" id="nlh-wR-yqY"/>
+                            <constraint firstItem="5c3-Y3-mKV" firstAttribute="top" secondItem="mpL-OQ-LbU" secondAttribute="bottom" id="yI8-kI-ruo"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="My Books" id="La2-Ml-Br7"/>
+                    <navigationItem key="navigationItem" title="My Books" id="ICN-VD-k2I"/>
+                    <connections>
+                        <outlet property="tableView" destination="mpL-OQ-LbU" id="kM1-xR-usy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bwT-Gu-ZOA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1728.8" y="618.44077961019491"/>
+        </scene>
+        <!--My Books-->
+        <scene sceneID="MVk-Mz-LhF">
+            <objects>
+                <navigationController id="EFD-Tg-UW2" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="My Books" id="7nC-8w-Oh1"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="y9h-ep-SPh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="7SW-eP-d5i" kind="relationship" relationship="rootViewController" id="s9e-DX-sy0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zx4-gt-JSS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="908" y="620"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="wU2-Ea-Zqm">
+            <objects>
+                <tabBarController id="fhW-Yh-lYP" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="8ZO-w1-S4P">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="8uZ-6w-lpB" kind="relationship" relationship="viewControllers" id="nPc-k7-pAF"/>
+                        <segue destination="EFD-Tg-UW2" kind="relationship" relationship="viewControllers" id="CRX-cf-xkd"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FOa-0K-kog" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-47" y="219"/>
+        </scene>
+        <!--For Sale-->
+        <scene sceneID="GhM-gX-p52">
+            <objects>
+                <collectionViewController id="8uZ-6w-lpB" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="quB-SU-U74">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ker-OI-oAV">
+                            <size key="itemSize" width="130" height="109"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SaleCell" id="Isq-Ry-SvS">
+                                <rect key="frame" x="0.0" y="0.0" width="130" height="109"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="130" height="109"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="8uZ-6w-lpB" id="FkO-1c-hkt"/>
+                            <outlet property="delegate" destination="8uZ-6w-lpB" id="TAN-j0-YgN"/>
+                        </connections>
+                    </collectionView>
+                    <tabBarItem key="tabBarItem" title="For Sale" id="doI-Mi-dLT"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cpA-8y-uIe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="908" y="-116.49175412293854"/>
+        </scene>
+    </scenes>
+</document>
